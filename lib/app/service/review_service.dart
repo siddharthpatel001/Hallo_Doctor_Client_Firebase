@@ -1,33 +1,25 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:hallo_doctor_client/app/models/doctor_model.dart';
-import 'package:hallo_doctor_client/app/models/review_model.dart';
 import 'package:hallo_doctor_client/app/models/time_slot_model.dart';
+import 'package:hallo_doctor_client/app/service/user_service.dart';
 
 class ReviewService {
   Future saveReview(
       String review, int rating, TimeSlot timeSlot, User user) async {
     print('review : ' + review);
-    print('rating :' + rating.toString());
-    ReviewModel reviewObject = ReviewModel();
-    //reviewObject.review = review;
-    //reviewObject.rating = rating;
-    //reviewObject.set('timeSlot', timeSlot.toPointer());
-    //reviewObject.user = user;
-    //reviewObject.doctor = timeSlot.doctor;
-
-    //var apiResponse = await reviewObject.save();
-
-    // if (apiResponse.success) {
-    //   print('Success save review');
-    //   //timeSlot.set('review', reviewObject.toPointer());
-    //   // ParseResponse timeSlotResponse = await timeSlot.update();
-    //   // if (timeSlotResponse.success) {
-    //   //   print('Save timeslot review');
-    //   // }
-    // } else {
-    //   return Future.error(apiResponse.error.toString());
-    // }
+    await FirebaseFirestore.instance
+        .collection('Review')
+        .doc(timeSlot.timeSlotId)
+        .set({
+      'review': review,
+      'rating': rating,
+      'timeSlotId': timeSlot.timeSlotId,
+      'userId': UserService().currentUser!.uid,
+      'doctorId': timeSlot.doctorid
+    });
+    try {} catch (e) {
+      return Future.error(e.toString());
+    }
   }
 
   // Future<List<ReviewModel>> getDoctorReview(

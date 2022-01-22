@@ -20,7 +20,6 @@ class DetailOrderController extends GetxController {
   List<OrderDetailModel> orderDetail = List.empty();
   TimeSlot selectedTimeSlot = Get.arguments[0];
   Doctor doctor = Get.arguments[1];
-  DoctorService doctorService = Get.find();
   PaymentService paymentService = Get.find();
   late String clientSecret;
   @override
@@ -29,7 +28,6 @@ class DetailOrderController extends GetxController {
     userService.getUsername().then((value) {
       username.value = value;
     });
-    doctorService.getDoctorScheduleById(selectedTimeSlot.timeSlotId!);
   }
 
   @override

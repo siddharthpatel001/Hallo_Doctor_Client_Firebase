@@ -29,27 +29,6 @@ class DoctorService {
     }
   }
 
-  //Get doctor schedule base on id
-  Future getDoctorScheduleById(String scheduleId) async {
-    // QueryBuilder<ParseObject> queryDoctorSchedule =
-    //     QueryBuilder(ParseObject('DoctorSchedule'))
-    //       ..whereEqualTo('objectId', scheduleId)
-    //       ..includeObject(['doctor.name'])
-    //       ..excludeKeys(['status']);
-    // final ParseResponse apiResponse = await queryDoctorSchedule.query();
-    // if (apiResponse.success && apiResponse.results != null) {
-    //   var parseObject = apiResponse.results as List<ParseObject>;
-    //   var listSchedule = parseObject.map((e) {
-    //     var doctorName = e.get<Object>('doctor');
-    //     return doctorName;
-    //   }).toList();
-    //   print('doctor : ' + listSchedule.toString());
-    // } else {
-    //   print('fail to get the data + ' + apiResponse.error.toString());
-    //   return Future.error(apiResponse.error!);
-    // }
-  }
-
 // Get doctor and all its property
   Future<Doctor> getDoctorDetail(String doctorId) async {
     var doctorSnapshot = await FirebaseFirestore.instance
@@ -105,19 +84,28 @@ class DoctorService {
     return [];
   }
 
-  // Future<List<Doctor>> searchDoctor(String doctorName) async {
-  //   QueryBuilder<Doctor> query = QueryBuilder(Doctor())
-  //     ..whereContains('name', doctorName)
-  //     ..setLimit(10)
-  //     ..keysToReturn(['name', 'doctorPicture']);
-  //   ParseResponse apiResponse = await query.query();
-  //   if (apiResponse.success && apiResponse.results != null) {
-  //     print('success get query' + apiResponse.results.toString());
-  //     var list = apiResponse.results!.cast<Doctor>();
-  //     //List<String> listDoctorName = list.map((e) => e.name!).toList();
-  //     return list;
-  //   } else {
-  //     return Future.error(apiResponse.error!.message);
-  //   }
-  // }
+  Future<List<Doctor>> searchDoctor(String doctorName) async {
+    try {
+      print('doctor name : ' + doctorName);
+      if (doctorName.isEmpty) return [];
+      var doctorRef = await FirebaseFirestore.instance
+          .collection('Doctors')
+          .where('doctorName',
+              isGreaterThanOrEqualTo: doctorName,
+              isLessThan: doctorName.substring(0, doctorName.length - 1) +
+                  String.fromCharCode(
+                      doctorName.codeUnitAt(doctorName.length - 1) + 1))
+          .get();
+      List<Doctor> listDoctor = doctorRef.docs.map((doc) {
+        var data = doc.data();
+        data['doctorId'] = doc.reference.id;
+        Doctor doctor = Doctor.fromJson(data);
+        return doctor;
+      }).toList();
+      print('data searchnya : ' + listDoctor.toString());
+      return listDoctor;
+    } catch (e) {
+      return Future.error(e.toString());
+    }
+  }
 }

@@ -15,55 +15,54 @@ class SearchDoctorView extends GetView<SearchDoctorController> {
           title: Text('Search Doctor'),
           centerTitle: true,
           actions: [
-            // IconButton(
-            //   onPressed: () async {
-            //     controller.doctor = (await showSearch(
-            //       context: context,
-            //       delegate: SearchDoctorDelegat(),
-            //     ))!;
-            //   },
-            //   icon: Icon(Icons.search),
-            // )
+            IconButton(
+              onPressed: () async {
+                controller.doctor.value = (await showSearch(
+                  context: context,
+                  delegate: SearchDoctorDelegat(),
+                ))!;
+              },
+              icon: Icon(Icons.search),
+            )
           ],
         ),
-        body: Text('emtpy remove this later change to bottom body'));
-    // body: Obx(
-    //   () => Container(
-    //     padding: EdgeInsets.fromLTRB(10, 15, 10, 10),
-    //     child: controller.doctor.value.name == null
-    //         ? Center(
-    //             child: Text(
-    //               'Search Doctor',
-    //               style: TextStyle(fontSize: 20),
-    //             ),
-    //           )
-    //         : ListView(children: [
-    //             Card(
-    //               child: ListTile(
-    //                 onTap: () {
-    //                   Get.toNamed('/detail-doctor',
-    //                       arguments: controller.doctor.value.objectId);
-    //                 },
-    //                 contentPadding:
-    //                     EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-    //                 leading: CircleAvatar(
-    //                   radius: 20,
-    //                   backgroundImage: CachedNetworkImageProvider(
-    //                       controller.doctor.value.picture!),
-    //                 ),
-    //                 title: Text(controller.doctor.value.name!),
-    //                 trailing: RatingBarIndicator(
-    //                     rating: 4.5,
-    //                     itemCount: 5,
-    //                     itemSize: 20.0,
-    //                     itemBuilder: (context, index) => Icon(
-    //                           Icons.star,
-    //                           color: Colors.amber,
-    //                         )),
-    //               ),
-    //             ),
-    //           ]),
-    //   ),
-    // ));
+        body: Obx(
+          () => Container(
+            padding: EdgeInsets.fromLTRB(10, 15, 10, 10),
+            child: controller.doctor.value.doctorName == null
+                ? Center(
+                    child: Text(
+                      'Search Doctor',
+                      style: TextStyle(fontSize: 20),
+                    ),
+                  )
+                : ListView(children: [
+                    Card(
+                      child: ListTile(
+                        onTap: () {
+                          Get.toNamed('/detail-doctor',
+                              arguments: controller.doctor.value);
+                        },
+                        contentPadding:
+                            EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                        leading: CircleAvatar(
+                          radius: 20,
+                          backgroundImage: CachedNetworkImageProvider(
+                              controller.doctor.value.doctorPicture!),
+                        ),
+                        title: Text(controller.doctor.value.doctorName!),
+                        trailing: RatingBarIndicator(
+                            rating: 4.5,
+                            itemCount: 5,
+                            itemSize: 20.0,
+                            itemBuilder: (context, index) => Icon(
+                                  Icons.star,
+                                  color: Colors.amber,
+                                )),
+                      ),
+                    ),
+                  ]),
+          ),
+        ));
   }
 }

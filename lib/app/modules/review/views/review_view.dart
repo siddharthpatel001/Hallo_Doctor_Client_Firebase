@@ -28,10 +28,10 @@ class ReviewView extends GetView<ReviewController> {
                   ListTile(
                     leading: CircleAvatar(
                       radius: 40,
-                      // backgroundImage: CachedNetworkImageProvider(
-                      //     controller.timeSlot.doctor!.doctorPicture!),
+                      backgroundImage: CachedNetworkImageProvider(
+                          controller.timeSlot.doctor!.doctorPicture!),
                     ),
-                    // title: Text(controller.timeSlot.doctor!.doctorName!),
+                    title: Text(controller.timeSlot.doctor!.doctorName!),
                   ),
                   Divider(),
                   TextField(
@@ -39,6 +39,7 @@ class ReviewView extends GetView<ReviewController> {
                         border: OutlineInputBorder(), hintText: 'Your Review'),
                     maxLines: 10,
                     textInputAction: TextInputAction.done,
+                    onSubmitted: (value) => controller.review = value,
                   ),
                   Divider(),
                   Obx(() => RatingBar.builder(

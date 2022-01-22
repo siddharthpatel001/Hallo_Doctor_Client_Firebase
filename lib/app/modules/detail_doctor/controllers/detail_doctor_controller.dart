@@ -1,8 +1,6 @@
 import 'package:get/get.dart';
 import 'package:hallo_doctor_client/app/models/doctor_model.dart';
 import 'package:hallo_doctor_client/app/models/review_model.dart';
-import 'package:hallo_doctor_client/app/service/doctor_service.dart';
-import 'package:hallo_doctor_client/app/service/review_service.dart';
 
 class DetailDoctorController extends GetxController with StateMixin<Doctor> {
   //TODO: Implement DetailDoctorController
@@ -15,7 +13,6 @@ class DetailDoctorController extends GetxController with StateMixin<Doctor> {
     super.onInit();
     // ReviewService().getDoctorReview(doctor: selectedDoctor).then((value) {
     //   listReview = value;
-
     // });
     change(selectedDoctor, status: RxStatus.success());
   }

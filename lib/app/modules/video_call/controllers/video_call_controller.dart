@@ -1,33 +1,53 @@
 import 'package:agora_uikit/agora_uikit.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hallo_doctor_client/app/models/time_slot_model.dart';
 import 'package:hallo_doctor_client/app/service/videocall_service.dart';
 
 class VideoCallController extends GetxController {
-  TimeSlot timeSlot = Get.arguments;
+  TimeSlot timeSlot = Get.arguments[0]['timeSlot'];
+  String token = Get.arguments[0]['token'];
+  String room = Get.arguments[0]['room'];
+  bool videoCallEstablished = false;
   VideoCallService videoCallService = Get.find();
   // Instantiate the client
-  final AgoraClient client = AgoraClient(
-    agoraConnectionData: AgoraConnectionData(
-      tempToken:
-          '0065918380664394b78bd3b16842b254f3cIAAR6GCW14nJZvuBajnHyFvhBNEj5pMASoleOEGbx+m0Jgx+f9gAAAAAEABLPQ3JMezpYQEAAQAw7Olh',
-      appId: "5918380664394b78bd3b16842b254f3c",
-      channelName: "test",
-    ),
-    enabledPermission: [
-      Permission.camera,
-      Permission.microphone,
-    ],
-  );
+  late final AgoraClient? client;
   @override
   void onInit() {
     super.onInit();
+    client = AgoraClient(
+      agoraEventHandlers: AgoraEventHandlers(
+        userOffline: (i, j) {
+          switch (j) {
+            case UserOfflineReason.Quit:
+              client!.sessionController.endCall();
+              completedConsultation();
+              break;
+            default:
+              return;
+          }
+        },
+        joinChannelSuccess: (channel, uid, elapsed) {
+          videoCallEstablished = true;
+          print('video call establish');
+        },
+      ),
+      agoraConnectionData: AgoraConnectionData(
+        tempToken: token,
+        appId: "5918380664394b78bd3b16842b254f3c",
+        channelName: room,
+      ),
+      enabledPermission: [
+        Permission.camera,
+        Permission.microphone,
+      ],
+    );
     initAgora();
     print('init video call');
   }
 
   void initAgora() async {
-    await client.initialize();
+    await client!.initialize();
   }
 
   @override
@@ -39,27 +59,17 @@ class VideoCallController extends GetxController {
   @override
   void onClose() async {
     //signaling.hangUp(localRenderer);
-  }
-
-  registerSignalingListener() {
-    // signaling.onAddRemoteStream = ((stream) {
-    //   remoteRenderer.srcObject = stream;
-    //   update();
-    // });
-    // signaling.onRemoveRemoteStream = ((stream) {
-    //   remoteRenderer.srcObject = null;
-    //   print('** REMOTE REMOVE');
-    // });
-    // signaling.onRemoteHangUp = ((value) async {
-    //   await completedConsultation();
-    // });
-  }
-
-  hangUp() async {
-    Get.back();
+    client!.sessionController.endCall();
   }
 
   completedConsultation() async {
-    Get.offNamed('/consultation-confirm', arguments: timeSlot);
+    if (videoCallEstablished) {
+      Get.offNamedUntil(
+          '/consultation-confirm', ModalRoute.withName('/appointment-detail'),
+          arguments: timeSlot);
+    } else {
+      printError(info: 'video call not establish yet');
+      Get.back();
+    }
   }
 }

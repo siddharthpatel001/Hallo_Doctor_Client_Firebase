@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
@@ -109,6 +110,21 @@ class ProfileController extends GetxController {
       Fluttertoast.showToast(msg: err.toString());
     }
     EasyLoading.dismiss();
+  }
+
+//user for testing something
+  Future testButton() async {
+    try {
+      var orderRef = await FirebaseFirestore.instance
+          .collection('Order')
+          .where('userId', isEqualTo: userService.getUserId())
+          .where('timeSlotId', isEqualTo: 'QhwsFmRmYnEkCRMfe4dG')
+          .get();
+      var order = orderRef.docs.single;
+      await order.reference.update({'status': 'success'});
+    } catch (e) {
+      return Future.error(e.toString());
+    }
   }
 
   // Future<bool> checkGoogleLogin() async {

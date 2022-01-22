@@ -1,3 +1,6 @@
+import 'dart:async';
+
+import 'package:firebase_database/firebase_database.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:hallo_doctor_client/app/models/doctor_model.dart';
@@ -16,6 +19,10 @@ class AppointmentDetailController extends GetxController
   TimeSlot selectedTimeslot = Get.arguments;
   late Doctor doctor;
   late Order order;
+  late String token;
+  var database = FirebaseDatabase.instance.ref();
+  StreamSubscription? _roomCreateSubscription;
+  StreamSubscription? _roomRemoveSubscription;
 
   @override
   void onInit() async {
@@ -26,33 +33,42 @@ class AppointmentDetailController extends GetxController
         change(selectedTimeslot, status: RxStatus.success());
       },
     );
-
-    bool isDoctorReady =
-        true; //await videoCallService.getRoom(selectedTimeslot);
-    if (isDoctorReady) {
+    _roomCreateSubscription = database
+        .child('room/' + selectedTimeslot.timeSlotId!)
+        .onChildAdded
+        .listen((event) {
       videoCallStatus.value = true;
-      //videoCallService.startListeningRoomDeletion();
-      videoCallService.onRoomAvailable = (value) {
-        videoCallStatus.value = value;
-      };
-    } else {
-      videoCallService.startListeningRoom(selectedTimeslot);
-      videoCallService.onRoomAvailable = (value) {
-        videoCallStatus.value = value;
-      };
-    }
+      if (event.snapshot.key == 'token') {
+        print('token : ' + event.snapshot.value.toString());
+        token = event.snapshot.value.toString();
+      }
+    });
+    _roomRemoveSubscription = database
+        .child('room/' + selectedTimeslot.timeSlotId!)
+        .onChildRemoved
+        .listen((event) {
+      videoCallStatus.value = false;
+      print('room delete');
+    });
   }
 
   @override
   void onClose() {
-    //videoCallService.stopListeningRoom();
+    _roomCreateSubscription!.cancel();
+    _roomRemoveSubscription!.cancel();
   }
 
   void startVideoCall() {
     if (videoCallStatus.value) {
       videoCallStatus.value = false;
       //videoCallService.stopListeningRoom();
-      Get.toNamed('/video-call', arguments: selectedTimeslot);
+      Get.toNamed('/video-call', arguments: [
+        {
+          'timeSlot': selectedTimeslot,
+          'room': selectedTimeslot.timeSlotId,
+          'token': token
+        }
+      ]);
     } else {
       Fluttertoast.showToast(
           msg:

@@ -21,15 +21,15 @@ class SearchDoctorDelegat extends SearchDelegate<Doctor> {
     return IconButton(
       icon: Icon(Icons.arrow_back),
       onPressed: () {
-        //close(context, <Doctor>[]);
+        close(context, Doctor());
       },
     );
   }
 
   @override
   Widget buildResults(BuildContext context) => FutureBuilder<List<Doctor>>(
-          // future: DoctorService().searchDoctor(query),
-          builder: (contex, snapshot) {
+      future: DoctorService().searchDoctor(query),
+      builder: (contex, snapshot) {
         if (query.isEmpty) return buildNoSuggestions();
         switch (snapshot.connectionState) {
           case ConnectionState.waiting:
@@ -52,7 +52,7 @@ class SearchDoctorDelegat extends SearchDelegate<Doctor> {
 
   @override
   Widget buildSuggestions(BuildContext context) => FutureBuilder<List<Doctor>>(
-        //  future: DoctorService().searchDoctor(query),
+        future: DoctorService().searchDoctor(query),
         builder: (context, snapshot) {
           if (query.isEmpty) return buildNoSuggestions();
           switch (snapshot.connectionState) {

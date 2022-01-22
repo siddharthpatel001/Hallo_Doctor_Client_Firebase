@@ -74,7 +74,14 @@ class ProfileView extends GetView<ProfileController> {
                         },
                         child: Text('logout'),
                       ),
-                    )
+                    ),
+                    //uncomment if you wanto test something
+                    // ElevatedButton(
+                    //   onPressed: () {
+                    //     controller.testButton();
+                    //   },
+                    //   child: Text('test button'),
+                    // )
                   ],
                 ),
               ),

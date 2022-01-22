@@ -17,7 +17,6 @@ class HomeController extends GetxController {
   void onInit() async {
     super.onInit();
     EasyLoading.instance.maskType = EasyLoadingMaskType.black;
-    var user = userService.currentUser;
     userPicture.value = userService.getProfilePicture()!;
   }
 

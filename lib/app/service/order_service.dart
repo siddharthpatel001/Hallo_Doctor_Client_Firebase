@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:hallo_doctor_client/app/models/order_model.dart';
 import 'package:hallo_doctor_client/app/models/time_slot_model.dart';
+import 'package:hallo_doctor_client/app/service/user_service.dart';
 
 class OrderService {
   Future<Order> getOrder(TimeSlot timeSlot) async {
@@ -21,30 +22,18 @@ class OrderService {
     }
   }
 
-  confirmOrder(TimeSlot timeSlot, User user) async {
-    // QueryBuilder<ParseObject> query = QueryBuilder(ParseObject('Order'));
-    // //  ..whereEqualTo('doctorSchedule', timeSlot.toPointer());
-    // //..whereEqualTo('user', user.toPointer());
-
-    // ParseResponse apiResponse = await query.query();
-    // if (apiResponse.success && apiResponse.results != null) {
-    //   print('success get order data');
-    //   await _setOrderComplete(apiResponse.results!.elementAt(0) as ParseObject);
-    //   var list = apiResponse.results!;
-    //   return list;
-    // } else {
-    //   return Future.error(apiResponse.error!.message);
-    // }
-  }
-
-  _setOrderComplete(Object order) async {
-    // order.set('status', 'complete');
-    // final ParseResponse apiResponse = await order.update();
-    // if (apiResponse.success) {
-    //   print('success complete order');
-    // } else {
-    //   return Future.error(apiResponse.error!.message);
-    // }
-    // order.update();
+  confirmOrder(TimeSlot timeSlot) async {
+    try {
+      print('timeslot id : ' + timeSlot.timeSlotId!);
+      var orderRef = await FirebaseFirestore.instance
+          .collection('Order')
+          .where('userId', isEqualTo: UserService().getUserId())
+          .where('timeSlotId', isEqualTo: timeSlot.timeSlotId)
+          .get();
+      var order = orderRef.docs.single;
+      await order.reference.update({'status': 'success'});
+    } catch (e) {
+      return Future.error(e.toString());
+    }
   }
 }

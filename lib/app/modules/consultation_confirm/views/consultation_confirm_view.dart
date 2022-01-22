@@ -24,8 +24,7 @@ class ConsultationConfirmView extends GetView<ConsultationConfirmController> {
             child: Obx(() => Column(
                   children: [
                     Text(
-                      'test',
-                      // 'Has the consultation with the ${controller.timeSlot.doctor!.doctorName} been completed?',
+                      'Has the consultation with the ${controller.timeSlot.doctor!.doctorName} been completed?',
                       style: GoogleFonts.nunito(fontSize: 25),
                     ),
                     SizedBox(

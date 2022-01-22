@@ -2,9 +2,7 @@ import 'package:get/get.dart';
 import 'package:hallo_doctor_client/app/models/doctor_model.dart';
 
 class SearchDoctorController extends GetxController {
-  //TODO: Implement SearchDoctorController
-  // Map<String, dynamic> data = {'emtpy':'emtpy'};
-  // Doctor doctor = Doctor.fromJson(data);
+  Rx<Doctor> doctor = Doctor().obs;
   final count = 0.obs;
 
   @override

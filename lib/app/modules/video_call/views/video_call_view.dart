@@ -12,8 +12,33 @@ class VideoCallView extends GetView<VideoCallController> {
       body: SafeArea(
         child: Stack(
           children: [
-            AgoraVideoViewer(client: controller.client),
-            AgoraVideoButtons(client: controller.client),
+            AgoraVideoViewer(
+              client: controller.client!,
+              layoutType: Layout.floating,
+            ),
+            AgoraVideoButtons(
+              client: controller.client!,
+              enabledButtons: [
+                BuiltInButtons.switchCamera,
+                BuiltInButtons.toggleMic
+              ],
+              extraButtons: [
+                FloatingActionButton(
+                    backgroundColor: Colors.red,
+                    child: Icon(Icons.call_end),
+                    onPressed: () => Get.defaultDialog(
+                          title: 'End the Consultation',
+                          content: Text(
+                            'are you sure you want to end Consultation',
+                          ),
+                          textCancel: 'Cancel',
+                          textConfirm: 'Yes',
+                          onConfirm: () {
+                            controller.completedConsultation();
+                          },
+                        ))
+              ],
+            ),
           ],
         ),
       ),

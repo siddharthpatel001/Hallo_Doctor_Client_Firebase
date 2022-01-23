@@ -58,8 +58,8 @@ class UserService {
   Future updateEmail(String email) async {
     try {
       currentUser!.updateEmail(email);
-    } catch (err) {
-      return Future.error(err);
+    } on FirebaseAuthException catch (err) {
+      return Future.error(err.message!);
     }
   }
 

@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:hallo_doctor_client/app/models/order_model.dart';
 import 'package:hallo_doctor_client/app/models/time_slot_model.dart';
 import 'package:hallo_doctor_client/app/service/user_service.dart';

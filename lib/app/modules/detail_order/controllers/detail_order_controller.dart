@@ -5,16 +5,12 @@ import 'package:get/get.dart';
 import 'package:hallo_doctor_client/app/models/doctor_model.dart';
 import 'package:hallo_doctor_client/app/models/order_detail_model.dart';
 import 'package:hallo_doctor_client/app/models/time_slot_model.dart';
-import 'package:hallo_doctor_client/app/service/doctor_service.dart';
 import 'package:hallo_doctor_client/app/service/payment_service.dart';
 import 'package:hallo_doctor_client/app/service/user_service.dart';
 import 'package:hallo_doctor_client/app/utils/constants/constants.dart';
 import 'package:intl/intl.dart';
 
 class DetailOrderController extends GetxController {
-  //TODO: Implement DetailOrderController
-
-  final count = 0.obs;
   final username = ''.obs;
   final UserService userService = Get.find();
   List<OrderDetailModel> orderDetail = List.empty();
@@ -32,7 +28,6 @@ class DetailOrderController extends GetxController {
 
   @override
   void onClose() {}
-  void increment() => count.value++;
 
   OrderDetailModel buildOrderDetail() {
     var formatter = DateFormat('yyyy-MM-dd hh:mm');

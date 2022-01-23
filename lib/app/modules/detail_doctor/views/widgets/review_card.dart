@@ -26,7 +26,7 @@ class ReviewCard extends StatelessWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        //Text(review.user!.username!),
+                        Text(review.user!.displayName!),
                         RatingBarIndicator(
                             rating: 4.5,
                             itemCount: 5,
@@ -42,7 +42,7 @@ class ReviewCard extends StatelessWidget {
                 Expanded(
                     child: Padding(
                   padding: EdgeInsets.all(10),
-                  //child: Text(review.review!),
+                  child: Text(review.review!),
                 ))
               ],
             ),
@@ -52,11 +52,9 @@ class ReviewCard extends StatelessWidget {
           padding: const EdgeInsets.all(10),
           child: CircleAvatar(
             radius: 30,
-            // backgroundImage: review.user?.get(ParseServerApi.PROFILE_PICTURE) ==
-            //         null
-            //     ? AssetImage('assets/images/user.png')
-            //     : NetworkImage(review.user!.get(ParseServerApi.PROFILE_PICTURE))
-            //         as ImageProvider,
+            backgroundImage: review.user?.photoUrl == null
+                ? AssetImage('assets/images/user.png')
+                : NetworkImage(review.user!.photoUrl!) as ImageProvider,
           ),
         )
       ],

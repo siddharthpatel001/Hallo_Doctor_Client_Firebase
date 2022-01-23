@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:hallo_doctor_client/app/service/user_service.dart';
-import 'package:hallo_doctor_client/app/service/user_service.dart';
 
 class FirebaseService {
   Future<bool> checkUserAlreadyLogin() async {
@@ -16,10 +15,11 @@ class FirebaseService {
 
   Future userSetup(User user, String displayName) async {
     CollectionReference users = FirebaseFirestore.instance.collection('Users');
-    String uid = UserService.user!.uid.toString();
+    String uid = user.uid.toString();
     users.doc(uid).set({
       'displayName': displayName,
       'uid': uid,
+      'email': user.email,
       'lastLogin': user.metadata.lastSignInTime!.millisecondsSinceEpoch,
       'createdAt': user.metadata.creationTime!.millisecondsSinceEpoch,
       'role': 'user'

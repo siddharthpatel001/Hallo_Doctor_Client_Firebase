@@ -3,8 +3,10 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:hallo_doctor_client/app/models/doctor_model.dart';
 import 'package:hallo_doctor_client/app/modules/home/views/components/icon_card.dart';
 import 'package:hallo_doctor_client/app/modules/home/views/components/list_doctor_card.dart';
+import 'package:hallo_doctor_client/app/service/doctor_service.dart';
 import 'package:hallo_doctor_client/app/utils/constants/style_constants.dart';
 
 import '../controllers/home_controller.dart';
@@ -149,11 +151,14 @@ class HomeView extends GetView<HomeController> {
                           ),
                           Padding(
                             padding: const EdgeInsets.only(right: 20),
-                            child: Text(
-                              'View All',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.blue[300]),
+                            child: TextButton(
+                              onPressed: () {
+                                controller.toTopRatedDoctor();
+                              },
+                              child: Text('View All',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.blue[300])),
                             ),
                           )
                         ],
@@ -163,31 +168,40 @@ class HomeView extends GetView<HomeController> {
                       child: RefreshIndicator(
                         displacement: 10,
                         onRefresh: () => test(),
-                        child: ListView(
-                          scrollDirection: Axis.vertical,
-                          shrinkWrap: true,
-                          children: [
-                            DoctorCard(
-                              doctorName: "Dr. Maria Alexandra",
-                              doctorSpecialty: "Obstetrician / Gynecologist",
-                              imageAssets: 'assets/images/fotodokter1.jpg',
-                            ),
-                            DoctorCard(
-                              doctorName: "Dr. Maria Alexandra",
-                              doctorSpecialty: "Obstetrician / Gynecologist",
-                              imageAssets: 'assets/images/fotodokter1.jpg',
-                            ),
-                            DoctorCard(
-                              doctorName: "Dr. Maria Alexandra",
-                              doctorSpecialty: "Obstetrician / Gynecologist",
-                              imageAssets: 'assets/images/fotodokter1.jpg',
-                            ),
-                            DoctorCard(
-                              doctorName: "Dr. Maria Alexandra",
-                              doctorSpecialty: "Obstetrician / Gynecologist",
-                              imageAssets: 'assets/images/fotodokter1.jpg',
-                            ),
-                          ],
+                        child: FutureBuilder<List<Doctor>>(
+                          future: DoctorService().getTopRatedDoctor(),
+                          builder: (context, snapshot) {
+                            switch (snapshot.connectionState) {
+                              case ConnectionState.waiting:
+                                return Center(
+                                    child: CircularProgressIndicator());
+                              default:
+                                if (snapshot.hasError ||
+                                    snapshot.data!.isEmpty) {
+                                  return Text(
+                                      'error + ' + snapshot.error.toString());
+                                } else {
+                                  return ListView.builder(
+                                      itemCount: snapshot.data!.length,
+                                      itemBuilder: (contex, index) =>
+                                          DoctorCard(
+                                            doctorName: snapshot
+                                                .data![index].doctorName,
+                                            doctorSpecialty: snapshot
+                                                .data![index]
+                                                .doctorCategory!
+                                                .categoryName,
+                                            imageUrl: snapshot
+                                                .data![index].doctorPicture,
+                                            onTap: () {
+                                              Get.toNamed('/detail-doctor',
+                                                  arguments:
+                                                      snapshot.data![index]);
+                                            },
+                                          ));
+                                }
+                            }
+                          },
                         ),
                       ),
                     ),

@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:hallo_doctor_client/app/models/doctor_category_model.dart';
 import 'package:hallo_doctor_client/app/models/doctor_model.dart';
-import 'package:hallo_doctor_client/app/models/review_model.dart';
 import 'package:hallo_doctor_client/app/models/time_slot_model.dart';
 
 class DoctorService {
@@ -66,22 +65,34 @@ class DoctorService {
   }
 
   Future<List<Doctor>> getTopRatedDoctor({int limit = 10}) async {
-    // QueryBuilder<ReviewModel> query = QueryBuilder(ReviewModel())
-    //   ..whereGreaterThan('rating', 4)
-    //   ..includeObject(['doctor'])
-    //   ..setLimit(limit);
-    // ParseResponse apiResponse = await query.query();
-    // if (apiResponse.success) {
-    //   print('success get top rated doctor');
-    //   if (apiResponse.results == null) return [];
-    //   var list = apiResponse.results!.cast<ReviewModel>();
-    //   print(list.toString());
-    //   List<Doctor> listDoctor = list.map((e) => e.doctor!).toList();
-    //   return listDoctor;
-    // } else {
-    //   return Future.error(apiResponse.error!.message);
-    // }
-    return [];
+    try {
+      var topRatedDoctor = await FirebaseFirestore.instance
+          .collection('TopRatedDoctor')
+          .limit(limit)
+          .get();
+      List<String> listIdTopRatedDoctor = topRatedDoctor.docs.map((doc) {
+        String myList =
+            (doc.data()['doctorId'] as String).replaceAll(RegExp(r"\s+"), "");
+        return myList;
+      }).toList();
+
+      print('list top rated : ' + listIdTopRatedDoctor.toString());
+
+      var doctorRef = await FirebaseFirestore.instance
+          .collection('Doctors')
+          .where(FieldPath.documentId, whereIn: listIdTopRatedDoctor)
+          .get();
+      print('length : ' + doctorRef.docs.length.toString());
+      List<Doctor> listTopRatedDoctor = doctorRef.docs.map((doc) {
+        var data = doc.data();
+        data['doctorId'] = doc.reference.id;
+        Doctor doctor = Doctor.fromJson(data);
+        return doctor;
+      }).toList();
+      return listTopRatedDoctor;
+    } catch (e) {
+      return Future.error(e.toString());
+    }
   }
 
   Future<List<Doctor>> searchDoctor(String doctorName) async {

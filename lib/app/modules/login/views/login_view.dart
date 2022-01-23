@@ -48,7 +48,7 @@ class LoginView extends GetView<LoginController> {
                             controller.username = username ?? '';
                           },
                           decoration: InputDecoration(
-                              hintText: 'Username or Email',
+                              hintText: 'Email',
                               border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(10.0),
                                   borderSide: BorderSide(

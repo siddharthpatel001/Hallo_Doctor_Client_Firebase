@@ -4,14 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:hallo_doctor_client/app/modules/profile/controllers/profile_controller.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:path/path.dart' as p;
 
 class EditImagePage extends GetView<ProfileController> {
   @override
   Widget build(BuildContext context) {
-    var image;
-    var imageFile;
+    XFile? image;
+    File? imageFile;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -46,18 +44,14 @@ class EditImagePage extends GetView<ProfileController> {
                       .pickImage(source: ImageSource.gallery);
 
                   if (image == null) return;
-
-                  final location = await getApplicationDocumentsDirectory();
-                  final name = p.basename(image.path);
-                  imageFile = File('${location.path}/$name');
-                  final newImage = await File(image.path).copy(imageFile.path);
+                  imageFile = File(image!.path);
                   controller.update();
                 },
                 child: GetBuilder<ProfileController>(
                   builder: (_) {
                     if (image != null) {
                       return Image.file(
-                        imageFile,
+                        imageFile!,
                         height: 350,
                       );
                     } else {
@@ -78,7 +72,7 @@ class EditImagePage extends GetView<ProfileController> {
                     child: ElevatedButton(
                       onPressed: () {
                         if (imageFile == null) return;
-                        controller.updateProfilePic(imageFile);
+                        controller.updateProfilePic(imageFile!);
                       },
                       child: const Text(
                         'Update',

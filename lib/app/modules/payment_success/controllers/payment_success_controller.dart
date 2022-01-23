@@ -6,9 +6,7 @@ import 'package:hallo_doctor_client/app/modules/appointment/controllers/appointm
 import 'package:hallo_doctor_client/app/modules/dashboard/controllers/dashboard_controller.dart';
 
 class PaymentSuccessController extends GetxController
-    with SingleGetTickerProviderMixin {
-  //TODO: Implement PaymentSuccessController
-
+    with GetSingleTickerProviderStateMixin {
   final count = 0.obs;
   late AnimationController animController;
   TimeSlot timeSlot = Get.arguments;

@@ -1,7 +1,6 @@
 import 'package:get/get.dart';
 import 'package:hallo_doctor_client/app/models/doctor_category_model.dart';
 import 'package:hallo_doctor_client/app/service/doctor_category_service.dart';
-import 'package:hallo_doctor_client/app/service/doctor_service.dart';
 
 class DoctorCategoryController extends GetxController
     with StateMixin<List<DoctorCategory>> {

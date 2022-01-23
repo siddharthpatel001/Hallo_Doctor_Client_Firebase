@@ -1,11 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:hallo_doctor_client/app/models/doctor_category_model.dart';
-import 'package:hallo_doctor_client/app/service/firebase_service.dart';
 
 class DoctorCategoryService {
   FirebaseFirestore? _instance;
 
-  List<DoctorCategory> _doctorCategory = [];
+  final List<DoctorCategory> _doctorCategory = [];
 
   List<DoctorCategory> get getCategories => _doctorCategory;
 

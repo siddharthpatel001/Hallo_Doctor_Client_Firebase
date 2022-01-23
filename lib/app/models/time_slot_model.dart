@@ -39,7 +39,8 @@ class TimeSlot {
       price: jsonData[_price],
       available: jsonData[_available],
       doctorid: jsonData[_doctorId],
-      doctor: Doctor.fromJson(jsonData[_doctor]),
+      doctor:
+          jsonData[_doctor] != null ? Doctor.fromJson(jsonData[_doctor]) : null,
       purchaseTime: jsonData[_purchaseTime] != null
           ? (jsonData[_purchaseTime] as Timestamp).toDate()
           : null,

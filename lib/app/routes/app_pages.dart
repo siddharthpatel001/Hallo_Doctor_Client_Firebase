@@ -1,3 +1,5 @@
+// ignore_for_file: constant_identifier_names
+
 import 'package:get/get.dart';
 import 'package:hallo_doctor_client/app/modules/appointment/bindings/appointment_binding.dart';
 import 'package:hallo_doctor_client/app/modules/appointment/views/appointment_view.dart';

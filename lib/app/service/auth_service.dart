@@ -15,9 +15,14 @@ class AuthService {
       final googleUser = await GoogleSignInApi.login();
       GoogleSignInAuthentication authentication =
           await googleUser!.authentication;
-      //await parseServerApi.loginWithGoogle(authentication, googleUser);
-    } catch (err) {
-      return Future.error(err);
+      var credential = GoogleAuthProvider.credential(
+          accessToken: authentication.accessToken,
+          idToken: authentication.idToken);
+      await FirebaseAuth.instance.signInWithCredential(credential);
+      User? user = FirebaseAuth.instance.currentUser;
+      await FirebaseService().userSetup(user!, user.displayName!);
+    } on FirebaseAuthException catch (err) {
+      return Future.error(err.message!);
     }
   }
 
@@ -25,8 +30,8 @@ class AuthService {
     try {
       await _auth.signInWithEmailAndPassword(
           email: username, password: password);
-    } catch (e) {
-      return Future.error(e.toString());
+    } on FirebaseAuthException catch (e) {
+      return Future.error(e.message!);
     }
   }
 
@@ -51,13 +56,11 @@ class AuthService {
   }
 
   Future resetPassword(String email) async {
-    // ParseResponse apiResponse =
-    //     await ParseUser('', '', email).requestPasswordReset();
-    // if (apiResponse.success) {
-    //   print('success send reset password');
-    // } else {
-    //   return Future.error(apiResponse.error!.message);
-    // }
+    try {
+      await _auth.sendPasswordResetEmail(email: email);
+    } on FirebaseAuthException catch (e) {
+      return Future.error(e.message!);
+    }
   }
 
   /// for checking user password, ex change password, withdraw balance need passsword
@@ -73,9 +76,4 @@ class AuthService {
       return false;
     }
   }
-
-  // Future<bool> checkIfGoogleLogin() async {
-  //   if (UserService.user!.get('authData') == null) return false;
-  //   return true;
-  // }
 }

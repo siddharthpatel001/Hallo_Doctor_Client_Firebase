@@ -85,16 +85,20 @@ class ProfileController extends GetxController {
 
   void updateEmail(String email) async {
     // if (!(await checkGoogleLogin())) return;
-    EasyLoading.show();
-    UserService().updateEmail(email).then((value) {
-      Get.back();
-      this.email.value = email;
-      update();
-    }).catchError((err) {
-      Fluttertoast.showToast(msg: err.toString());
-    }).whenComplete(() {
-      EasyLoading.dismiss();
-    });
+    try {
+      EasyLoading.show();
+      UserService().updateEmail(email).then((value) {
+        Get.back();
+        this.email.value = email;
+        update();
+      }).catchError((err) {
+        Fluttertoast.showToast(msg: err.toString());
+      }).whenComplete(() {
+        EasyLoading.dismiss();
+      });
+    } catch (e) {
+      Fluttertoast.showToast(msg: e.toString());
+    }
   }
 
   void changePassword(String currentPassword, String newPassword) async {

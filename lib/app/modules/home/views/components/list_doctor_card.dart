@@ -5,9 +5,14 @@ import 'package:hallo_doctor_client/app/utils/constants/style_constants.dart';
 class DoctorCard extends StatelessWidget {
   final String? doctorName;
   final String? doctorSpecialty;
-  final String? imageAssets;
+  final String? imageUrl;
+  final VoidCallback onTap;
   const DoctorCard(
-      {Key? key, this.doctorName, this.doctorSpecialty, this.imageAssets})
+      {Key? key,
+      this.doctorName,
+      this.doctorSpecialty,
+      this.imageUrl,
+      required this.onTap})
       : super(key: key);
 
   @override
@@ -27,7 +32,7 @@ class DoctorCard extends StatelessWidget {
                 children: [
                   Padding(
                     padding: const EdgeInsets.all(10),
-                    child: Image.asset(imageAssets!),
+                    child: Image.network(imageUrl!),
                   ),
                   Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -56,7 +61,7 @@ class DoctorCard extends StatelessWidget {
                   ),
                   Expanded(
                     child: InkWell(
-                        onTap: () {},
+                        onTap: onTap,
                         child: Container(
                           height: 50,
                           margin: EdgeInsets.only(left: 10, right: 10),

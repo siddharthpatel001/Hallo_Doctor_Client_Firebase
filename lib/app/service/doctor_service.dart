@@ -77,7 +77,7 @@ class DoctorService {
       }).toList();
 
       print('list top rated : ' + listIdTopRatedDoctor.toString());
-
+      if (listIdTopRatedDoctor.isEmpty) return [];
       var doctorRef = await FirebaseFirestore.instance
           .collection('Doctors')
           .where(FieldPath.documentId, whereIn: listIdTopRatedDoctor)

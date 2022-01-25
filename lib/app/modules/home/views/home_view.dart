@@ -176,10 +176,17 @@ class HomeView extends GetView<HomeController> {
                                 return Center(
                                     child: CircularProgressIndicator());
                               default:
-                                if (snapshot.hasError ||
-                                    snapshot.data!.isEmpty) {
-                                  return Text(
-                                      'error + ' + snapshot.error.toString());
+                                if (snapshot.hasError) {
+                                  return Center(
+                                    child: Text(
+                                        'error + ' + snapshot.error.toString()),
+                                  );
+                                } else if (snapshot.data!.isEmpty) {
+                                  return Center(
+                                    child: Text(
+                                      'top rated doctor is empty ',
+                                    ),
+                                  );
                                 } else {
                                   return ListView.builder(
                                       itemCount: snapshot.data!.length,

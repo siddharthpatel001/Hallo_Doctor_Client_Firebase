@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:hallo_doctor_client/app/service/user_service.dart';
 
 class FirebaseService {
   Future<bool> checkUserAlreadyLogin() async {

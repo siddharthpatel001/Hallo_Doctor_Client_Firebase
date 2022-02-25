@@ -36,12 +36,14 @@ class AppointmentDetailController extends GetxController
     _roomCreateSubscription = database
         .child('room/' + selectedTimeslot.timeSlotId!)
         .onChildAdded
-        .listen((event) {
-      videoCallStatus.value = true;
-      if (event.snapshot.key == 'token') {
-        print('token : ' + event.snapshot.value.toString());
-        token = event.snapshot.value.toString();
-      }
+        .listen((event) async {
+      await Future.delayed(const Duration(seconds: 3), () {
+        videoCallStatus.value = true;
+        if (event.snapshot.key == 'token') {
+          print('room added token : ' + event.snapshot.value.toString());
+          token = event.snapshot.value.toString();
+        }
+      });
     });
     _roomRemoveSubscription = database
         .child('room/' + selectedTimeslot.timeSlotId!)
@@ -83,7 +85,7 @@ class AppointmentDetailController extends GetxController
 
   Future getOrder() async {
     try {
-      order = await OrderService().getOrder(selectedTimeslot);
+      order = await OrderService().getSuccessOrder(selectedTimeslot);
     } catch (err) {
       Fluttertoast.showToast(msg: err.toString());
     }

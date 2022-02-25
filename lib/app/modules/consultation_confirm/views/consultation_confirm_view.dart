@@ -35,11 +35,11 @@ class ConsultationConfirmView extends GetView<ConsultationConfirmController> {
                           Get.defaultDialog(
                               title: 'Confirm',
                               middleText:
-                                  'payment for doctor amsyari will be made if you confirm this transaction',
+                                  'payment for doctor ${controller.timeSlot.doctor!.doctorName} will be made if you confirm this transaction',
                               textCancel: 'Cancel',
                               textConfirm: 'Confirm',
-                              onConfirm: () {
-                                controller.confirmConsultation();
+                              onConfirm: () async {
+                                await controller.confirmConsultation();
                               });
                         },
                         text: 'Yes & Give Review'),

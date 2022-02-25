@@ -30,9 +30,9 @@ class ConsultationConfirmController extends GetxController {
     try {
       EasyLoading.show();
       await OrderService().confirmOrder(timeSlot);
+      EasyLoading.dismiss();
       Get.offNamedUntil('/review', ModalRoute.withName('/appointment-detail'),
           arguments: timeSlot);
-      EasyLoading.dismiss();
     } catch (e) {
       EasyLoading.dismiss();
       Fluttertoast.showToast(msg: e.toString());

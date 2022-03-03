@@ -35,6 +35,6 @@ class DetailDoctorController extends GetxController with StateMixin<Doctor> {
         displayName: selectedDoctor.doctorName,
         imageUrl: selectedDoctor.doctorPicture);
     final room = await FirebaseChatCore.instance.createRoom(otherUser);
-    Get.toNamed('/chat', arguments: room);
+    Get.toNamed('/chat', arguments: [room, selectedDoctor]);
   }
 }

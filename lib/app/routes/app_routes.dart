@@ -26,6 +26,8 @@ abstract class Routes {
   static const TOP_RATED_DOCTOR = _Paths.TOP_RATED_DOCTOR;
   static const SEARCH_DOCTOR = _Paths.SEARCH_DOCTOR;
   static const CONSULTATION_CONFIRM = _Paths.CONSULTATION_CONFIRM;
+  static const CHAT = _Paths.CHAT;
+  static const LIST_CHAT = _Paths.LIST_CHAT;
 }
 
 abstract class _Paths {
@@ -49,4 +51,6 @@ abstract class _Paths {
   static const TOP_RATED_DOCTOR = '/top-rated-doctor';
   static const SEARCH_DOCTOR = '/search-doctor';
   static const CONSULTATION_CONFIRM = '/consultation-confirm';
+  static const CHAT = '/chat';
+  static const LIST_CHAT = '/list-chat';
 }

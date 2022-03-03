@@ -1,6 +1,9 @@
 import 'dart:io';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:hallo_doctor_client/app/models/user_model.dart';
+import 'package:hallo_doctor_client/app/service/firebase_service.dart';
 import 'package:path/path.dart';
 
 import 'auth_service.dart';
@@ -77,5 +80,20 @@ class UserService {
 
   String getUserId() {
     return currentUser!.uid;
+  }
+
+  Future<UserModel?> getUsernameById(String userId) async {
+    try {
+      var user = await FirebaseFirestore.instance
+          .collection('Users')
+          .doc(userId)
+          .get();
+      user.data();
+      if (!user.exists) return null;
+      UserModel userModel = UserModel.fromJson(user.data()!);
+      return userModel;
+    } catch (e) {
+      return Future.error(e.toString());
+    }
   }
 }

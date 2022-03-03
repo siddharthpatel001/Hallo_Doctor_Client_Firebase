@@ -1,10 +1,11 @@
-// ignore_for_file: constant_identifier_names
-
 import 'package:get/get.dart';
+
 import 'package:hallo_doctor_client/app/modules/appointment/bindings/appointment_binding.dart';
 import 'package:hallo_doctor_client/app/modules/appointment/views/appointment_view.dart';
 import 'package:hallo_doctor_client/app/modules/appointment_detail/bindings/appointment_detail_binding.dart';
 import 'package:hallo_doctor_client/app/modules/appointment_detail/views/appointment_detail_view.dart';
+import 'package:hallo_doctor_client/app/modules/chat/bindings/chat_binding.dart';
+import 'package:hallo_doctor_client/app/modules/chat/views/chat_view.dart';
 import 'package:hallo_doctor_client/app/modules/consultation_confirm/bindings/consultation_confirm_binding.dart';
 import 'package:hallo_doctor_client/app/modules/consultation_confirm/views/consultation_confirm_view.dart';
 import 'package:hallo_doctor_client/app/modules/consultation_date_picker/bindings/consultation_date_picker_binding.dart';
@@ -19,9 +20,10 @@ import 'package:hallo_doctor_client/app/modules/doctor_category/bindings/doctor_
 import 'package:hallo_doctor_client/app/modules/doctor_category/views/doctor_category_view.dart';
 import 'package:hallo_doctor_client/app/modules/forgot_password/bindings/forgot_password_binding.dart';
 import 'package:hallo_doctor_client/app/modules/forgot_password/views/forgot_password_view.dart';
-
 import 'package:hallo_doctor_client/app/modules/home/bindings/home_binding.dart';
 import 'package:hallo_doctor_client/app/modules/home/views/home_view.dart';
+import 'package:hallo_doctor_client/app/modules/list_chat/bindings/list_chat_binding.dart';
+import 'package:hallo_doctor_client/app/modules/list_chat/views/list_chat_view.dart';
 import 'package:hallo_doctor_client/app/modules/list_doctor/bindings/list_doctor_binding.dart';
 import 'package:hallo_doctor_client/app/modules/list_doctor/views/list_doctor_view.dart';
 import 'package:hallo_doctor_client/app/modules/login/bindings/login_binding.dart';
@@ -42,6 +44,8 @@ import 'package:hallo_doctor_client/app/modules/top_rated_doctor/bindings/top_ra
 import 'package:hallo_doctor_client/app/modules/top_rated_doctor/views/top_rated_doctor_view.dart';
 import 'package:hallo_doctor_client/app/modules/video_call/bindings/video_call_binding.dart';
 import 'package:hallo_doctor_client/app/modules/video_call/views/video_call_view.dart';
+
+// ignore_for_file: constant_identifier_names
 
 part 'app_routes.dart';
 
@@ -151,6 +155,16 @@ class AppPages {
       name: _Paths.CONSULTATION_CONFIRM,
       page: () => ConsultationConfirmView(),
       binding: ConsultationConfirmBinding(),
+    ),
+    GetPage(
+      name: _Paths.CHAT,
+      page: () => ChatView(),
+      binding: ChatBinding(),
+    ),
+    GetPage(
+      name: _Paths.LIST_CHAT,
+      page: () => ListChatView(),
+      binding: ListChatBinding(),
     ),
   ];
 }

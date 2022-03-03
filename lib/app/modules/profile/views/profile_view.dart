@@ -76,12 +76,12 @@ class ProfileView extends GetView<ProfileController> {
                       ),
                     ),
                     //uncomment if you wanto test something
-                    // ElevatedButton(
-                    //   onPressed: () {
-                    //     controller.testButton();
-                    //   },
-                    //   child: Text('test button'),
-                    // )
+                    ElevatedButton(
+                      onPressed: () {
+                        controller.testButton();
+                      },
+                      child: Text('test button'),
+                    )
                   ],
                 ),
               ),
@@ -103,49 +103,55 @@ class ProfileView extends GetView<ProfileController> {
   // Widget builds the display item with the proper formatting to display the user's info
   Widget buildUserInfoDisplay(String getValue, String title, Widget editPage) =>
       Padding(
-          padding: EdgeInsets.only(bottom: 10),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                margin: EdgeInsets.only(left: 10, top: 5),
-                child: Text(
-                  title,
-                  style: TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.w500,
-                    color: Colors.grey,
-                  ),
+        padding: EdgeInsets.only(bottom: 10),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              margin: EdgeInsets.only(left: 10, top: 5),
+              child: Text(
+                title,
+                style: TextStyle(
+                  fontSize: 15,
+                  fontWeight: FontWeight.w500,
+                  color: Colors.grey,
                 ),
               ),
-              SizedBox(
-                height: 1,
-              ),
-              Container(
-                  width: 350,
-                  height: 40,
-                  decoration: BoxDecoration(
-                      border: Border(
-                          bottom: BorderSide(
+            ),
+            SizedBox(
+              height: 1,
+            ),
+            Container(
+              width: 350,
+              height: 40,
+              decoration: BoxDecoration(
+                  border: Border(
+                      bottom: BorderSide(
+                color: Colors.grey,
+                width: 1,
+              ))),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: TextButton(
+                      onPressed: () {
+                        Get.to(() => editPage);
+                      },
+                      child: Text(
+                        getValue,
+                        style: TextStyle(fontSize: 16, height: 1.4),
+                      ),
+                    ),
+                  ),
+                  Icon(
+                    Icons.keyboard_arrow_right,
                     color: Colors.grey,
-                    width: 1,
-                  ))),
-                  child: Row(children: [
-                    Expanded(
-                        child: TextButton(
-                            onPressed: () {
-                              Get.to(() => editPage);
-                            },
-                            child: Text(
-                              getValue,
-                              style: TextStyle(fontSize: 16, height: 1.4),
-                            ))),
-                    Icon(
-                      Icons.keyboard_arrow_right,
-                      color: Colors.grey,
-                      size: 40.0,
-                    )
-                  ]))
-            ],
-          ));
+                    size: 40.0,
+                  )
+                ],
+              ),
+            )
+          ],
+        ),
+      );
 }

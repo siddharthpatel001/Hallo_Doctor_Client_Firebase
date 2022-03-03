@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:hallo_doctor_client/app/modules/appointment/views/appointment_view.dart';
 import 'package:hallo_doctor_client/app/modules/doctor_category/views/doctor_category_view.dart';
 import 'package:hallo_doctor_client/app/modules/home/views/home_view.dart';
+import 'package:hallo_doctor_client/app/modules/list_chat/views/list_chat_view.dart';
 import 'package:hallo_doctor_client/app/modules/profile/views/profile_view.dart';
 
 import '../controllers/dashboard_controller.dart';
@@ -13,6 +14,7 @@ class DashboardView extends GetView<DashboardController> {
     HomeView(),
     DoctorCategoryView(),
     AppointmentView(),
+    ListChatView(),
     ProfileView()
   ];
   @override
@@ -37,10 +39,16 @@ class DashboardView extends GetView<DashboardController> {
                     label: "Doctor"),
                 BottomNavigationBarItem(
                     icon: Icon(
-                      Icons.message,
+                      Icons.video_camera_front,
                       color: Colors.blue[500],
                     ),
                     label: "Appointment"),
+                BottomNavigationBarItem(
+                    icon: Icon(
+                      Icons.message,
+                      color: Colors.blue[500],
+                    ),
+                    label: "Chat"),
                 BottomNavigationBarItem(
                     icon: Icon(
                       Icons.person,

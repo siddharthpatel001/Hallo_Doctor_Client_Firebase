@@ -49,7 +49,6 @@ class DoctorService {
               isEqualTo: doctorCategory.categoryId)
           .get();
 
-      print('masuk sini kok');
       if (listDoctorQuery.docs.isEmpty) return [];
       var list = listDoctorQuery.docs.map((doc) {
         var data = doc.data();
@@ -115,6 +114,20 @@ class DoctorService {
       }).toList();
       print('data searchnya : ' + listDoctor.toString());
       return listDoctor;
+    } catch (e) {
+      return Future.error(e.toString());
+    }
+  }
+
+  Future<String> getUserId(Doctor doctor) async {
+    try {
+      var user = await FirebaseFirestore.instance
+          .collection('Users')
+          .where('doctorId', isEqualTo: doctor.doctorId)
+          .get();
+      print('doc element' + user.docs.length.toString());
+      if (user.docs.isEmpty) return '';
+      return user.docs.elementAt(0).id;
     } catch (e) {
       return Future.error(e.toString());
     }

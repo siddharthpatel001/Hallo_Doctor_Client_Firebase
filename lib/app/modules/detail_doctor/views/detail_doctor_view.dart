@@ -52,11 +52,12 @@ class DetailDoctorView extends GetView<DetailDoctorController> {
                     height: 20,
                   ),
                   Container(
-                      width: double.infinity,
-                      child: Text(
-                        'Biography',
-                        style: titleTextStyle,
-                      )),
+                    width: double.infinity,
+                    child: Text(
+                      'Biography',
+                      style: titleTextStyle,
+                    ),
+                  ),
                   SizedBox(height: 5),
                   Text(
                     doctor.doctorShortBiography!,
@@ -125,7 +126,7 @@ class DetailDoctorView extends GetView<DetailDoctorController> {
                   flex: 8,
                   child: Container(
                     child: Padding(
-                      padding: const EdgeInsets.all(10),
+                      padding: const EdgeInsets.fromLTRB(10, 10, 3, 10),
                       child: InkWell(
                         onTap: () {
                           Get.toNamed('/consultation-date-picker', arguments: [
@@ -146,6 +147,21 @@ class DetailDoctorView extends GetView<DetailDoctorController> {
                           ),
                         ),
                       ),
+                    ),
+                  ),
+                ),
+                InkWell(
+                  onTap: () => controller.toChatDoctor(),
+                  child: Container(
+                    width: 50,
+                    height: 50,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(50)),
+                      color: secondaryColor,
+                    ),
+                    child: Icon(
+                      Icons.message_rounded,
+                      color: Colors.white,
                     ),
                   ),
                 )

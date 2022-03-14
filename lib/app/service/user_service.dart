@@ -96,4 +96,15 @@ class UserService {
       return Future.error(e.toString());
     }
   }
+
+  Future updateUserToken(String? token) async {
+    try {
+      FirebaseFirestore.instance
+          .collection('Users')
+          .doc(currentUser!.uid)
+          .update({'token': token});
+    } catch (e) {
+      Future.error(e.toString());
+    }
+  }
 }

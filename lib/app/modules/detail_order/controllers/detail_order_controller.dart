@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:hallo_doctor_client/app/models/doctor_model.dart';
 import 'package:hallo_doctor_client/app/models/order_detail_model.dart';
 import 'package:hallo_doctor_client/app/models/time_slot_model.dart';
+import 'package:hallo_doctor_client/app/service/notification_service.dart';
 import 'package:hallo_doctor_client/app/service/payment_service.dart';
 import 'package:hallo_doctor_client/app/service/user_service.dart';
 import 'package:hallo_doctor_client/app/utils/constants/constants.dart';
@@ -17,6 +18,7 @@ class DetailOrderController extends GetxController {
   TimeSlot selectedTimeSlot = Get.arguments[0];
   Doctor doctor = Get.arguments[1];
   PaymentService paymentService = Get.find();
+  NotificationService notificationService = Get.find<NotificationService>();
   late String clientSecret;
   @override
   void onInit() {
@@ -60,7 +62,11 @@ class DetailOrderController extends GetxController {
       ));
       EasyLoading.dismiss();
       await Stripe.instance.presentPaymentSheet();
+
       Get.offNamed('/payment-success', arguments: selectedTimeSlot);
+      //selectedTimeSlot.timeSlot
+      notificationService
+          .setNotificationAppointment(selectedTimeSlot.timeSlot!);
     } catch (err) {
       Fluttertoast.showToast(msg: err.toString());
       return null;

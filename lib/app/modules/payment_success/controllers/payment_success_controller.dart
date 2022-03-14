@@ -27,7 +27,7 @@ class PaymentSuccessController extends GetxController
   void increment() => count.value++;
 
   void goHome() {
-    Get.offNamed('dashboard');
+    Get.offAllNamed('dashboard');
     Get.find<DashboardController>().selectedIndex = 2;
     Get.find<AppointmentController>().getListAppointment();
   }

@@ -3,6 +3,7 @@ import 'package:hallo_doctor_client/app/modules/appointment/controllers/appointm
 import 'package:hallo_doctor_client/app/modules/doctor_category/controllers/doctor_category_controller.dart';
 import 'package:hallo_doctor_client/app/modules/home/controllers/home_controller.dart';
 import 'package:hallo_doctor_client/app/modules/profile/controllers/profile_controller.dart';
+import 'package:hallo_doctor_client/app/service/notification_service.dart';
 import 'package:hallo_doctor_client/app/service/timeslot_service.dart';
 import 'package:hallo_doctor_client/app/service/auth_service.dart';
 import 'package:hallo_doctor_client/app/service/user_service.dart';
@@ -15,6 +16,9 @@ class DashboardBinding extends Bindings {
     Get.put(AuthService());
     Get.lazyPut<DashboardController>(
       () => DashboardController(),
+    );
+    Get.lazyPut<NotificationService>(
+      () => NotificationService(),
     );
     Get.lazyPut<UserService>(() => UserService());
     Get.put(HomeController());

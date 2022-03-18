@@ -53,7 +53,7 @@ class ProfileController extends GetxController {
       textConfirm: 'Logout',
       onConfirm: () {
         authService.logout().then(
-              (value) => Get.toNamed('/login'),
+              (value) => Get.offAllNamed('/login'),
             );
       },
     );

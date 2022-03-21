@@ -52,9 +52,10 @@ class ReviewCard extends StatelessWidget {
           padding: const EdgeInsets.all(10),
           child: CircleAvatar(
             radius: 30,
-            backgroundImage: review.user?.photoUrl == null
-                ? AssetImage('assets/images/user.png')
-                : NetworkImage(review.user!.photoUrl!) as ImageProvider,
+            backgroundImage:
+                review.user!.photoUrl == null || review.user!.photoUrl!.isEmpty
+                    ? AssetImage('assets/images/user.png')
+                    : NetworkImage(review.user!.photoUrl!) as ImageProvider,
           ),
         )
       ],

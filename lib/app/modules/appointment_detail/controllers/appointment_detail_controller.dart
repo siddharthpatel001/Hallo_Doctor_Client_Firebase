@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
@@ -21,9 +22,7 @@ class AppointmentDetailController extends GetxController
   late Order order;
   late String token;
   var database = FirebaseDatabase.instance.ref();
-  StreamSubscription? _roomCreateSubscription;
-  StreamSubscription? _roomRemoveSubscription;
-
+  late StreamSubscription _roomStreaming;
   @override
   void onInit() async {
     super.onInit();
@@ -33,37 +32,32 @@ class AppointmentDetailController extends GetxController
         change(selectedTimeslot, status: RxStatus.success());
       },
     );
-    _roomCreateSubscription = database
-        .child('room/' + selectedTimeslot.timeSlotId!)
-        .onChildAdded
-        .listen((event) async {
-      await Future.delayed(const Duration(seconds: 3), () {
-        videoCallStatus.value = true;
-        if (event.snapshot.key == 'token') {
-          print('room added token : ' + event.snapshot.value.toString());
-          token = event.snapshot.value.toString();
-        }
-      });
-    });
-    _roomRemoveSubscription = database
-        .child('room/' + selectedTimeslot.timeSlotId!)
-        .onChildRemoved
-        .listen((event) {
-      videoCallStatus.value = false;
-      print('room delete');
+    var roomSnapshot = FirebaseFirestore.instance
+        .collection('RoomVideoCall')
+        .doc(selectedTimeslot.timeSlotId!)
+        .snapshots();
+
+    _roomStreaming = roomSnapshot.listen((event) async {
+      if (event.data() == null) {
+        videoCallStatus.value = false;
+      } else {
+        await Future.delayed(const Duration(seconds: 3), () {
+          videoCallStatus.value = true;
+          token = event.data()!['token'];
+          printInfo(info: 'token : ' + token);
+        });
+      }
     });
   }
 
   @override
   void onClose() {
-    _roomCreateSubscription!.cancel();
-    _roomRemoveSubscription!.cancel();
+    _roomStreaming.cancel();
   }
 
   void startVideoCall() {
     if (videoCallStatus.value) {
       videoCallStatus.value = false;
-      //videoCallService.stopListeningRoom();
       Get.toNamed('/video-call', arguments: [
         {
           'timeSlot': selectedTimeslot,

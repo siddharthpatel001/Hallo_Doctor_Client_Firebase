@@ -3,16 +3,16 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'doctor_model.dart';
 
 class TimeSlot {
-  TimeSlot({
-    this.timeSlotId,
-    this.timeSlot,
-    this.duration,
-    this.price,
-    this.available,
-    this.doctorid,
-    this.doctor,
-    this.purchaseTime,
-  });
+  TimeSlot(
+      {this.timeSlotId,
+      this.timeSlot,
+      this.duration,
+      this.price,
+      this.available,
+      this.doctorid,
+      this.doctor,
+      this.purchaseTime,
+      this.status});
   static const String _timeSlotId = 'timeSlotId';
   static const String _timeSlot = 'timeSlot';
   static const String _duration = 'duration';
@@ -21,6 +21,7 @@ class TimeSlot {
   static const String _doctorId = 'doctorId';
   static const String _doctor = 'doctor';
   static const String _purchaseTime = 'purchaseTime';
+  static const String _status = 'status';
 
   String? timeSlotId;
   DateTime? timeSlot;
@@ -30,6 +31,7 @@ class TimeSlot {
   String? doctorid;
   Doctor? doctor;
   DateTime? purchaseTime;
+  String? status;
 
   factory TimeSlot.fromJson(Map<String, dynamic> jsonData) {
     return TimeSlot(
@@ -44,6 +46,7 @@ class TimeSlot {
       purchaseTime: jsonData[_purchaseTime] != null
           ? (jsonData[_purchaseTime] as Timestamp).toDate()
           : null,
+      status: jsonData[_status],
     );
   }
 }

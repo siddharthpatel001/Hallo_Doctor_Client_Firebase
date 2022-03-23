@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:hallo_doctor_client/app/models/doctor_model.dart';
@@ -23,13 +24,24 @@ class AppointmentDetailController extends GetxController
   late String token;
   var database = FirebaseDatabase.instance.ref();
   late StreamSubscription _roomStreaming;
+  var active = true.obs;
   @override
   void onInit() async {
     super.onInit();
+
     DoctorService().getDoctorDetail(selectedTimeslot.doctorid!).then(
       (doc) {
         selectedTimeslot.doctor = doc;
         change(selectedTimeslot, status: RxStatus.success());
+        if (selectedTimeslot.status == 'refund') {
+          Get.defaultDialog(
+              title: 'Appointment Canceled',
+              content: Text(
+                  'the doctor has canceled the appointment, and your payment has been refunded'),
+              onConfirm: () {
+                Get.back();
+              });
+        }
       },
     );
     var roomSnapshot = FirebaseFirestore.instance
@@ -66,10 +78,17 @@ class AppointmentDetailController extends GetxController
         }
       ]);
     } else {
-      Fluttertoast.showToast(
-          msg:
-              'the doctor has not started the meeting session, this button will automatically turn on when the doctor has started it',
-          toastLength: Toast.LENGTH_LONG);
+      if (selectedTimeslot.status == 'refund') {
+        Fluttertoast.showToast(
+            msg:
+                'the doctor has canceled the appointment, and your payment has been refunded',
+            toastLength: Toast.LENGTH_LONG);
+      } else {
+        Fluttertoast.showToast(
+            msg:
+                'the doctor has not started the meeting session, this button will automatically turn on when the doctor has started it',
+            toastLength: Toast.LENGTH_LONG);
+      }
     }
   }
 

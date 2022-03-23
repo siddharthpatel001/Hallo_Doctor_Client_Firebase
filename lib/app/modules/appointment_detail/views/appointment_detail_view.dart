@@ -53,7 +53,7 @@ class AppointmentDetailView extends GetView<AppointmentDetailController> {
                 ),
                 Container(
                   margin: EdgeInsets.only(bottom: 8),
-                  height: 190,
+                  height: 240,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(8),
                       boxShadow: [
@@ -104,6 +104,20 @@ class AppointmentDetailView extends GetView<AppointmentDetailController> {
                               ),
                             ],
                           ),
+                          TableRow(
+                            children: [
+                              SizedBox(
+                                height: 50,
+                                child: Text('Status'),
+                              ),
+                              SizedBox(
+                                height: 50,
+                                child: Text(
+                                  controller.selectedTimeslot.status ?? '',
+                                ),
+                              ),
+                            ],
+                          ),
                         ],
                       ),
                     ],
@@ -115,14 +129,21 @@ class AppointmentDetailView extends GetView<AppointmentDetailController> {
                       },
                       text: 'Start Consultation',
                       active: controller.videoCallStatus.value,
+                      nonActiveMsg:
+                          'the doctor has canceled the appointment, and your payment has been refunded',
                     )),
                 SizedBox(
                   height: 10,
                 ),
-                Text(
-                  'the start consultation button will be active when the doctor starts the consultation',
-                  style: Styles.greyTextInfoStyle,
-                ),
+                controller.selectedTimeslot.status == 'refund'
+                    ? Text(
+                        'the doctor has canceled the appointment, and your payment has been refunded',
+                        style: Styles.greyTextInfoStyle,
+                      )
+                    : Text(
+                        'the start consultation button will be active when the doctor starts the consultation',
+                        style: Styles.greyTextInfoStyle,
+                      ),
               ],
             ),
           ),

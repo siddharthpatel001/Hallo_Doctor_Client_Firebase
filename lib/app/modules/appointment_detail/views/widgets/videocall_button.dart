@@ -14,6 +14,7 @@ class VideoCallButton extends Container {
   final Color splashColor;
   final double fontSize;
   bool active;
+  final String nonActiveMsg;
 
   VideoCallButton(
       {required this.function,
@@ -22,7 +23,8 @@ class VideoCallButton extends Container {
       this.fontSize = 16,
       this.color = Colors.blue,
       this.textColor = Colors.white,
-      this.active = false});
+      this.active = false,
+      this.nonActiveMsg = 'The doctor hasn\'t started the consultation yet'});
 
   @override
   Widget build(BuildContext context) {
@@ -30,8 +32,7 @@ class VideoCallButton extends Container {
       onTap: active
           ? function
           : () {
-              Fluttertoast.showToast(
-                  msg: 'The doctor hasn\'t started the consultation yet');
+              Fluttertoast.showToast(msg: nonActiveMsg);
             },
       child: Container(
         width: Get.width,

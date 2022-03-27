@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cloud_functions/cloud_functions.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:hallo_doctor_client/app/models/time_slot_model.dart';
 
@@ -25,6 +26,20 @@ class TimeSlotService {
       return listTimeslot;
     } catch (e) {
       return Future.error(e.toString());
+    }
+  }
+
+  Future rescheduleTimeslot(
+      TimeSlot timeSlotNow, TimeSlot timeslotChanged) async {
+    try {
+      var callable =
+          FirebaseFunctions.instance.httpsCallable('rescheduleTimeslot');
+      await callable({
+        'timeSlotIdNow': timeSlotNow.timeSlotId,
+        'timeslotChanged': timeslotChanged.timeSlotId
+      });
+    } on FirebaseFunctionsException catch (e) {
+      return Future.error(e.message!);
     }
   }
 }

@@ -36,6 +36,7 @@ class DoctorService {
         .get();
     Doctor doctor =
         Doctor.fromJson(doctorSnapshot.data() as Map<String, dynamic>);
+    doctor.doctorId = doctorId;
     return doctor;
   }
 

@@ -129,10 +129,8 @@ class DetailDoctorView extends GetView<DetailDoctorController> {
                       padding: const EdgeInsets.fromLTRB(10, 10, 3, 10),
                       child: InkWell(
                         onTap: () {
-                          Get.toNamed('/consultation-date-picker', arguments: [
-                            controller.selectedDoctor,
-                            //controller.doctor
-                          ]);
+                          Get.toNamed('/consultation-date-picker',
+                              arguments: [controller.selectedDoctor, null]);
                         },
                         child: Container(
                           height: 50,

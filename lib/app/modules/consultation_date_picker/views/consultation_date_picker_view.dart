@@ -132,13 +132,7 @@ class ConsultationDatePickerView
                 if (controller.selectedTimeSlot.value.timeSlotId == null) {
                   Fluttertoast.showToast(msg: 'Please select time slot');
                 } else {
-                  Get.toNamed(
-                    '/detail-order',
-                    arguments: [
-                      controller.selectedTimeSlot.value,
-                      controller.doctor
-                    ],
-                  );
+                  controller.confirm();
                 }
               },
               child: Container(

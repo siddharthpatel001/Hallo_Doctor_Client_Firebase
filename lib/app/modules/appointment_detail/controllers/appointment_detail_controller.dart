@@ -28,10 +28,11 @@ class AppointmentDetailController extends GetxController
   @override
   void onInit() async {
     super.onInit();
-
+    print('kepanggil gaes');
     DoctorService().getDoctorDetail(selectedTimeslot.doctorid!).then(
       (doc) {
         selectedTimeslot.doctor = doc;
+        doctor = doc;
         change(selectedTimeslot, status: RxStatus.success());
         if (selectedTimeslot.status == 'refund') {
           Get.defaultDialog(
@@ -102,5 +103,10 @@ class AppointmentDetailController extends GetxController
     } catch (err) {
       Fluttertoast.showToast(msg: err.toString());
     }
+  }
+
+  void rescheduleAppointment() {
+    Get.toNamed('/consultation-date-picker',
+        arguments: [selectedTimeslot.doctor, selectedTimeslot]);
   }
 }

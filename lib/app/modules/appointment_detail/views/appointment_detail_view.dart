@@ -13,9 +13,39 @@ class AppointmentDetailView extends GetView<AppointmentDetailController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Consultation Detail'),
-        centerTitle: true,
-      ),
+          title: Text('Consultation Detail'),
+          centerTitle: true,
+          actions: [
+            //list if widget in appbar actions
+            PopupMenuButton(
+              color: Colors.white,
+              itemBuilder: (context) => [
+                PopupMenuItem<int>(
+                  value: 0,
+                  child: Text(
+                    "Reschedule Appointment",
+                  ),
+                ),
+              ],
+              onSelected: (int item) => {
+                if (item == 0)
+                  {
+                    //cancel appointment click
+                    Get.defaultDialog(
+                        title: 'Reschedule Appointment',
+                        content: Text(
+                          'You can only reschedule this appointment once, Are you sure want to reschedule this appointment',
+                          textAlign: TextAlign.center,
+                        ),
+                        onCancel: () {},
+                        onConfirm: () {
+                          Get.back();
+                          controller.rescheduleAppointment();
+                        })
+                  }
+              },
+            ),
+          ]),
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.all(10),

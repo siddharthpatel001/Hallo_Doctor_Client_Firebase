@@ -64,6 +64,6 @@ class DashboardView extends GetView<DashboardController> {
         body: Obx(() => Center(
               child: IndexedStack(
                   index: controller.selectedIndex, children: bodyContent),
-            )));
+            ),),);
   }
 }

@@ -85,7 +85,7 @@ class LoginView extends GetView<LoginController> {
                                 )),
                             validator: ((value) {
                               if (value!.isEmpty) {
-                                return 'Password tidak boleh kosong';
+                                return 'Password cannot be empty';
                               } else {
                                 return null;
                               }
@@ -107,7 +107,7 @@ class LoginView extends GetView<LoginController> {
                       alignment: Alignment.centerRight,
                       child: Text('Forgot Password ?',
                           style: TextStyle(
-                              fontSize: 14, fontWeight: FontWeight.w500)),
+                              fontSize: 14, fontWeight: FontWeight.w500),),
                     ),
                   ),
                   SizedBox(height: height * .020),

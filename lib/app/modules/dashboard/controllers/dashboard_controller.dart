@@ -1,5 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
+import 'package:hallo_doctor_client/app/service/auth_service.dart';
 import 'package:hallo_doctor_client/app/service/notification_service.dart';
 import 'package:hallo_doctor_client/app/service/user_service.dart';
 
@@ -17,6 +19,11 @@ class DashboardController extends GetxController {
     notificationService.listenNotification();
     await UserService()
         .updateUserToken(await notificationService.getNotificationToken());
+    if (await UserService().checkIfUserExist() == false) {
+      EasyLoading.dismiss();
+      AuthService().logout();
+      return Get.offAllNamed('/login');
+    }
     EasyLoading.dismiss();
   }
 

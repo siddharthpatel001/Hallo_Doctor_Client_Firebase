@@ -67,6 +67,9 @@ class DetailOrderController extends GetxController {
       //selectedTimeSlot.timeSlot
       notificationService
           .setNotificationAppointment(selectedTimeSlot.timeSlot!);
+    } on StripeException catch (err) {
+      Fluttertoast.showToast(msg: err.error.message!);
+      return null;
     } catch (err) {
       Fluttertoast.showToast(msg: err.toString());
       return null;

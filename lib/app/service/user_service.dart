@@ -107,4 +107,13 @@ class UserService {
       Future.error(e.toString());
     }
   }
+
+  Future<bool> checkIfUserExist() async {
+    var userSnapshot = await FirebaseFirestore.instance
+        .collection('Users')
+        .doc(currentUser!.uid)
+        .get();
+    if (userSnapshot.exists) return true;
+    return false;
+  }
 }

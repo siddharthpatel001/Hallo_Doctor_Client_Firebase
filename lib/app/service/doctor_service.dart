@@ -48,6 +48,7 @@ class DoctorService {
           .collection('Doctors')
           .where('doctorCategory.categoryId',
               isEqualTo: doctorCategory.categoryId)
+          .where('accountStatus', isEqualTo: 'active')
           .get();
 
       if (listDoctorQuery.docs.isEmpty) return [];
@@ -113,6 +114,7 @@ class DoctorService {
         Doctor doctor = Doctor.fromJson(data);
         return doctor;
       }).toList();
+      listDoctor.removeWhere((element) => element.accountStatus != 'active');
       print('data searchnya : ' + listDoctor.toString());
       return listDoctor;
     } catch (e) {

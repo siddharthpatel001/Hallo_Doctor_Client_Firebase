@@ -8,7 +8,8 @@ class Doctor {
       this.doctorPrice,
       this.doctorShortBiography,
       this.doctorCategory,
-      this.doctorHospital});
+      this.doctorHospital,
+      this.accountStatus});
   static const String _doctorId = 'doctorId';
   static const String _doctorName = 'doctorName';
   static const String _doctorPicture = 'doctorPicture';
@@ -16,6 +17,7 @@ class Doctor {
   static const String _doctorShortBiography = 'doctorBiography';
   static const String _doctorCategory = 'doctorCategory';
   static const String _doctorHospital = 'doctorHospital';
+  static const String _accountStatus = 'accountStatus';
   String? doctorId;
   String? doctorName;
   String? doctorPicture;
@@ -23,6 +25,7 @@ class Doctor {
   String? doctorShortBiography;
   DoctorCategory? doctorCategory;
   String? doctorHospital;
+  String? accountStatus;
 
   factory Doctor.fromJson(Map<String, dynamic> data) {
     return Doctor(
@@ -34,6 +37,7 @@ class Doctor {
         doctorCategory: data[_doctorCategory] != null
             ? DoctorCategory.fromJson(data[_doctorCategory])
             : null,
-        doctorHospital: data[_doctorHospital]);
+        doctorHospital: data[_doctorHospital],
+        accountStatus: data[_accountStatus]);
   }
 }

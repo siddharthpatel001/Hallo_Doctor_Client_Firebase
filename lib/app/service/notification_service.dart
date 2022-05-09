@@ -4,6 +4,7 @@ import 'package:cloud_functions/cloud_functions.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_callkit_incoming/flutter_callkit_incoming.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_native_timezone/flutter_native_timezone.dart';
 import 'package:get/get.dart';
@@ -33,6 +34,7 @@ class NotificationService {
     FirebaseMessaging.onBackgroundMessage(_firebaseMessaggingBackgroundHandler);
     setupFlutterNotification();
     setupTimezone();
+    setupNotificationAction();
   }
   void setupFlutterNotification() async {
     await flutterLocalNotificationsPlugin
@@ -60,20 +62,26 @@ class NotificationService {
   }
 
   void listenNotification() {
-    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+    FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
       RemoteNotification? notification = message.notification;
       AndroidNotification? android = message.notification?.android;
       if (notification != null && android != null) {
-        flutterLocalNotificationsPlugin.show(
-            notification.hashCode,
-            notification.title,
-            notification.body,
-            NotificationDetails(
-                android: AndroidNotificationDetails(channel.id, channel.name,
-                    channelDescription: channel.description,
-                    color: Styles.primaryBlueColor,
-                    playSound: true,
-                    icon: '@mipmap/launcher_icon')));
+        print('masuk notifikasinya');
+        if (message.data['type'] == 'call') {
+          await showCallNotification(message.data['fromName'],
+              message.data['roomName'], message.data['token']);
+        } else {
+          flutterLocalNotificationsPlugin.show(
+              notification.hashCode,
+              notification.title,
+              notification.body,
+              NotificationDetails(
+                  android: AndroidNotificationDetails(channel.id, channel.name,
+                      channelDescription: channel.description,
+                      color: Styles.primaryBlueColor,
+                      playSound: true,
+                      icon: '@mipmap/launcher_icon')));
+        }
       }
     });
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
@@ -94,6 +102,78 @@ class NotificationService {
     //     await FlutterNativeTimezone.getLocalTimezone();
     // tz.setLocalLocation(tz.getLocation(currentTimeZone));
     //printInfo(info: 'local timezone : ' + currentTimeZone);
+  }
+
+  void setupNotificationAction() {
+    FlutterCallkitIncoming.onEvent.listen((event) {
+      switch (event!.name) {
+        case CallEvent.ACTION_CALL_INCOMING:
+          print('incoming call gaes');
+          break;
+        case CallEvent.ACTION_CALL_ACCEPT:
+          print('body ' + event.body['extra']['roomName']);
+          print('accept the data');
+          Get.toNamed('/video-call', arguments: [
+            {
+              'room': event.body['extra']['roomName'],
+              'token': event.body['extra']['token']
+            }
+          ]);
+          break;
+        case CallEvent.ACTION_CALL_DECLINE:
+          print('declien call gaes');
+          break;
+      }
+    });
+    // connecticube.ConnectycubeFlutterCallKit.instance.init(
+    //   onCallAccepted: _onCallAccepted,
+    //   onCallRejected: _onCallRejected,
+    // );
+  }
+
+  Future showCallNotification(
+      String fromName, String roomName, String token) async {
+    var params = <String, dynamic>{
+      'id': 'adsfadfds',
+      'nameCaller': fromName,
+      'appName': 'Moneyvizer',
+      'avatar': '',
+      'handle': '',
+      'type': 1,
+      'textAccept': 'Accept',
+      'textDecline': 'Decline',
+      'textMissedCall': 'Missed call',
+      'textCallback': 'Call back',
+      'duration': 30000,
+      'extra': <String, dynamic>{'roomName': roomName, 'token': token},
+      'headers': <String, dynamic>{'apiKey': 'Abc@123!', 'platform': 'flutter'},
+      'android': <String, dynamic>{
+        'isCustomNotification': true,
+        'isShowLogo': false,
+        'isShowCallback': false,
+        'ringtonePath': 'system_ringtone_default',
+        'backgroundColor': '#0955fa',
+        'backgroundUrl': 'https://i.pravatar.cc/500',
+        'actionColor': '#4CAF50'
+      },
+      'ios': <String, dynamic>{
+        'iconName': 'CallKitLogo',
+        'handleType': 'generic',
+        'supportsVideo': true,
+        'maximumCallGroups': 2,
+        'maximumCallsPerCallGroup': 1,
+        'audioSessionMode': 'default',
+        'audioSessionActive': true,
+        'audioSessionPreferredSampleRate': 44100.0,
+        'audioSessionPreferredIOBufferDuration': 0.005,
+        'supportsDTMF': true,
+        'supportsHolding': true,
+        'supportsGrouping': false,
+        'supportsUngrouping': false,
+        'ringtonePath': 'system_ringtone_default'
+      }
+    };
+    await FlutterCallkitIncoming.showCallkitIncoming(params);
   }
 
   Future<String?> getNotificationToken() async {

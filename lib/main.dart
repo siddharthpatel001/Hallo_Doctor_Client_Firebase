@@ -19,7 +19,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await dotenv.load();
   await Firebase.initializeApp();
-  NotificationService notificationService = NotificationService();
+  NotificationService();
   bool isUserLogin = await FirebaseService().checkUserAlreadyLogin();
   Stripe.publishableKey = Environment.stripePublishableKey;
   initializeDateFormatting('en', null);

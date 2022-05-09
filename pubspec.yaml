@@ -17,7 +17,6 @@ dependencies:
   firebase_storage: ^10.2.5
   cloud_functions: ^3.2.5
   firebase_database: ^9.0.5
-  agora_uikit: ^0.0.4
   google_sign_in: ^5.1.1
   flutter_signin_button: ^2.0.0
   flutter_easyloading: ^3.0.3
@@ -52,6 +51,9 @@ dependencies:
   timezone: ^0.8.0
   flutter_native_timezone: ^2.0.0
   jiffy: ^5.0.0
+  agora_rtc_engine: ^5.1.0
+  permission_handler: ^9.2.0
+  flutter_callkit_incoming: ^1.0.1+8
 
 dev_dependencies:
   flutter_lints: ^1.0.0

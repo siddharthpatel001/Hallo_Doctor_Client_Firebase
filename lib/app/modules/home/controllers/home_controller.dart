@@ -2,6 +2,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:hallo_doctor_client/app/modules/dashboard/controllers/dashboard_controller.dart';
 import 'package:hallo_doctor_client/app/service/auth_service.dart';
+import 'package:hallo_doctor_client/app/service/carousel_service.dart';
 import 'package:hallo_doctor_client/app/service/user_service.dart';
 
 class HomeController extends GetxController {
@@ -12,12 +13,16 @@ class HomeController extends GetxController {
   AuthService authService = Get.find();
   UserService userService = Get.find();
   var userPicture = ''.obs;
+  List<String?> listImageCarousel = [];
 
   @override
   void onInit() async {
     super.onInit();
     EasyLoading.instance.maskType = EasyLoadingMaskType.black;
     userPicture.value = userService.getProfilePicture()!;
+    listImageCarousel = await CarouselService().getListCarouselUrl();
+    print('jumlah image carousel : ' + listImageCarousel.length.toString());
+    update();
   }
 
   @override

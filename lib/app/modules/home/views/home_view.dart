@@ -67,45 +67,77 @@ class HomeView extends GetView<HomeController> {
                     ),
                     Padding(
                       padding: const EdgeInsets.only(top: 10),
-                      child: CarouselSlider(
-                        carouselController: caoruselController,
-                        options: CarouselOptions(
-                            height: 200,
-                            autoPlay: true,
-                            aspectRatio: 2.0,
-                            viewportFraction: 0.9,
-                            onPageChanged: (index, reason) {
-                              controller.carouselChange(index);
-                            }),
-                        items: imgListAssetSlider,
+                      child: GetBuilder<HomeController>(
+                        builder: (_) {
+                          return CarouselSlider(
+                            carouselController: caoruselController,
+                            options: CarouselOptions(
+                                height: 200,
+                                autoPlay: true,
+                                aspectRatio: 2.0,
+                                viewportFraction: 0.9,
+                                onPageChanged: (index, reason) {
+                                  controller.carouselChange(index);
+                                }),
+                            items: imgListAssetSlider(
+                                controller.listImageCarousel),
+                          );
+                        },
                       ),
                     ),
                     Obx(
                       () => Row(
                         mainAxisAlignment: MainAxisAlignment.center,
-                        children: imgListAsset.asMap().entries.map((entry) {
-                          return GestureDetector(
-                            onTap: () =>
-                                caoruselController.animateToPage(entry.key),
-                            child: Container(
-                              width: 12.0,
-                              height: 12.0,
-                              margin: EdgeInsets.symmetric(
-                                  vertical: 8.0, horizontal: 4.0),
-                              decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: (Theme.of(context).brightness ==
-                                              Brightness.dark
-                                          ? Colors.white
-                                          : Colors.black)
-                                      .withOpacity(
-                                          controller.getcaoruselIndex ==
-                                                  entry.key
-                                              ? 0.9
-                                              : 0.4)),
-                            ),
-                          );
-                        }).toList(),
+                        children: controller.listImageCarousel.isNotEmpty
+                            ? controller.listImageCarousel
+                                .asMap()
+                                .entries
+                                .map((entry) {
+                                return GestureDetector(
+                                  onTap: () => caoruselController
+                                      .animateToPage(entry.key),
+                                  child: Container(
+                                    width: 12.0,
+                                    height: 12.0,
+                                    margin: EdgeInsets.symmetric(
+                                        vertical: 8.0, horizontal: 4.0),
+                                    decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: (Theme.of(context).brightness ==
+                                                    Brightness.dark
+                                                ? Colors.white
+                                                : Colors.black)
+                                            .withOpacity(
+                                                controller.getcaoruselIndex ==
+                                                        entry.key
+                                                    ? 0.9
+                                                    : 0.4)),
+                                  ),
+                                );
+                              }).toList()
+                            : imgListAsset.asMap().entries.map((entry) {
+                                return GestureDetector(
+                                  onTap: () => caoruselController
+                                      .animateToPage(entry.key),
+                                  child: Container(
+                                    width: 12.0,
+                                    height: 12.0,
+                                    margin: EdgeInsets.symmetric(
+                                        vertical: 8.0, horizontal: 4.0),
+                                    decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: (Theme.of(context).brightness ==
+                                                    Brightness.dark
+                                                ? Colors.white
+                                                : Colors.black)
+                                            .withOpacity(
+                                                controller.getcaoruselIndex ==
+                                                        entry.key
+                                                    ? 0.9
+                                                    : 0.4)),
+                                  ),
+                                );
+                              }).toList(),
                       ),
                     ),
                     Padding(
@@ -231,17 +263,37 @@ final List<String> imgListAsset = [
   'assets/images/carousel1.jpg',
   'assets/images/carousel1.jpg'
 ];
-final List<Widget> imgListAssetSlider = imgListAsset
-    .map((item) => Container(
-          child: Container(
-            margin: EdgeInsets.all(5.0),
-            child: ClipRRect(
-                borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                child: Stack(
-                  children: <Widget>[
-                    Image.asset(item, fit: BoxFit.cover, width: 1000.0),
-                  ],
-                )),
-          ),
-        ))
-    .toList();
+
+List<Widget> imgListAssetSlider(List<String?> imgCarouselList) {
+  if (imgCarouselList.isEmpty) {
+    return imgListAsset
+        .map((item) => Container(
+              child: Container(
+                margin: EdgeInsets.all(5.0),
+                child: ClipRRect(
+                    borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                    child: Stack(
+                      children: <Widget>[
+                        Image.asset(item, fit: BoxFit.cover, width: 1000.0),
+                      ],
+                    )),
+              ),
+            ))
+        .toList();
+  }
+  return imgCarouselList
+      .map((item) => Container(
+            child: Container(
+              margin: EdgeInsets.all(5.0),
+              child: ClipRRect(
+                  borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                  child: Stack(
+                    children: <Widget>[
+                      Image.network(item ?? "",
+                          fit: BoxFit.cover, width: 1000.0),
+                    ],
+                  )),
+            ),
+          ))
+      .toList();
+}

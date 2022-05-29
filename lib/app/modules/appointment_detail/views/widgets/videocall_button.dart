@@ -24,7 +24,7 @@ class VideoCallButton extends Container {
       this.color = Colors.blue,
       this.textColor = Colors.white,
       this.active = false,
-      this.nonActiveMsg = 'The doctor hasn\'t started the consultation yet'});
+      required this.nonActiveMsg});
 
   @override
   Widget build(BuildContext context) {

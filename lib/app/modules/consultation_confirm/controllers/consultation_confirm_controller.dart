@@ -18,10 +18,11 @@ class ConsultationConfirmController extends GetxController {
     ProblemService().sendProblem(problem, timeSlot).then((value) {
       Get.back();
       Get.defaultDialog(
-          title: 'Info',
+          title: 'Info'.tr,
           onConfirm: () => Get.back(),
-          middleText:
-              "payment for ${timeSlot.doctor!.doctorName} will be delayed until the problem is resolved");
+          middleText: 'Payment for '.tr +
+              timeSlot.doctor!.doctorName! +
+              ' will be delayed until the problem is resolved'.tr);
       EasyLoading.dismiss();
     });
   }

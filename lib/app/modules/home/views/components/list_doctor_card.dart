@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:get/get.dart';
 import 'package:hallo_doctor_client/app/utils/constants/style_constants.dart';
 
 class DoctorCard extends StatelessWidget {
@@ -70,7 +71,7 @@ class DoctorCard extends StatelessWidget {
                               color: Colors.blue[400],
                               borderRadius: BorderRadius.circular(8)),
                           child: Text(
-                            "Book Appointment",
+                            "Book Appointment".tr,
                             style: TextStyle(color: Colors.white),
                             textAlign: TextAlign.center,
                           ),

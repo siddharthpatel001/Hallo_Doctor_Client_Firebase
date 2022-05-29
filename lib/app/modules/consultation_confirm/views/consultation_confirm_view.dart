@@ -14,7 +14,7 @@ class ConsultationConfirmView extends GetView<ConsultationConfirmController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Consultation Confirmation'),
+        title: Text('Consultation Confirmation'.tr),
         centerTitle: true,
       ),
       body: SingleChildScrollView(
@@ -24,7 +24,9 @@ class ConsultationConfirmView extends GetView<ConsultationConfirmController> {
             child: Obx(() => Column(
                   children: [
                     Text(
-                      'Has the consultation with the ${controller.timeSlot.doctor!.doctorName} been completed?',
+                      'Has the consultation with the'.tr +
+                          controller.timeSlot.doctor!.doctorName! +
+                          'been completed?'.tr,
                       style: GoogleFonts.nunito(fontSize: 25),
                     ),
                     SizedBox(
@@ -33,16 +35,18 @@ class ConsultationConfirmView extends GetView<ConsultationConfirmController> {
                     submitButton(
                         onTap: () {
                           Get.defaultDialog(
-                              title: 'Confirm',
-                              middleText:
-                                  'payment for doctor ${controller.timeSlot.doctor!.doctorName} will be made if you confirm this transaction',
-                              textCancel: 'Cancel',
-                              textConfirm: 'Confirm',
+                              title: 'Confirm'.tr,
+                              middleText: 'Payment for doctor '.tr +
+                                  controller.timeSlot.doctor!.doctorName! +
+                                  ' will be made if you confirm this transaction'
+                                      .tr,
+                              textCancel: 'Cancel'.tr,
+                              textConfirm: 'Confirm'.tr,
                               onConfirm: () async {
                                 await controller.confirmConsultation();
                               });
                         },
-                        text: 'Yes & Give Review'),
+                        text: 'Yes & Give Review'.tr),
                     SizedBox(
                       height: 10,
                     ),
@@ -51,7 +55,7 @@ class ConsultationConfirmView extends GetView<ConsultationConfirmController> {
                         controller.problemVisible.value =
                             !controller.problemVisible.value;
                       },
-                      child: Text('No, there is a problem'),
+                      child: Text('No, there is a problem'.tr),
                     ),
                     Visibility(
                       visible: controller.problemVisible.value,
@@ -62,16 +66,16 @@ class ConsultationConfirmView extends GetView<ConsultationConfirmController> {
                             children: [
                               FormBuilderRadioGroup(
                                 decoration:
-                                    InputDecoration(labelText: 'Problem'),
+                                    InputDecoration(labelText: 'Problem'.tr),
                                 name: 'my_problem',
                                 validator:
                                     FormBuilderValidators.required(context),
                                 options: [
-                                  'Black screen, no consultation happened',
-                                  'No sound',
-                                  'Video call quality is very bad',
-                                  'No consultation at all',
-                                  'Other'
+                                  'Black screen, no consultation happened'.tr,
+                                  'No sound'.tr,
+                                  'Video call quality is very bad'.tr,
+                                  'No consultation at all'.tr,
+                                  'Other'.tr
                                 ]
                                     .map((lang) =>
                                         FormBuilderFieldOption(value: lang))
@@ -81,13 +85,14 @@ class ConsultationConfirmView extends GetView<ConsultationConfirmController> {
                                 name: 'specify',
                                 decoration: InputDecoration(
                                     labelText:
-                                        'Please, explain the problem briefly'),
+                                        'Please, explain the problem briefly'
+                                            .tr),
                                 validator: (val) {
                                   if (_formKey.currentState
                                               ?.fields['my_problem']?.value ==
-                                          'Other' &&
+                                          'Other'.tr &&
                                       (val == null || val.isEmpty)) {
-                                    return 'Kindly explain your problem';
+                                    return 'Kindly explain your problem'.tr;
                                   }
                                 },
                                 initialValue: '',

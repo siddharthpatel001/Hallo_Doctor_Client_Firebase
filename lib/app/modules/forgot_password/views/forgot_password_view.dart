@@ -15,7 +15,7 @@ class ForgotPasswordView extends GetView<ForgotPasswordController> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('ForgotPasswordView'),
+        title: Text('Forgot Password'.tr),
         centerTitle: true,
       ),
       body: SingleChildScrollView(
@@ -25,7 +25,7 @@ class ForgotPasswordView extends GetView<ForgotPasswordController> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Reset Password.?',
+                'Reset Password.?'.tr,
                 style: GoogleFonts.nunito(
                     fontSize: 30, fontWeight: FontWeight.w700),
               ),
@@ -33,7 +33,7 @@ class ForgotPasswordView extends GetView<ForgotPasswordController> {
                 height: 10,
               ),
               Text(
-                'Enter Email address associated with your account',
+                'Enter Email address associated with your account'.tr,
                 style: GoogleFonts.nunito(
                     fontSize: 15, fontWeight: FontWeight.w600),
               ),
@@ -64,7 +64,7 @@ class ForgotPasswordView extends GetView<ForgotPasswordController> {
               RoundedLoadingButton(
                 resetAfterDuration: true,
                 resetDuration: Duration(seconds: 7),
-                child: Text('Reset Password',
+                child: Text('Reset Password'.tr,
                     style: TextStyle(color: Colors.white)),
                 controller: controller.roundedBtnController,
                 onPressed: () {

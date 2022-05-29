@@ -28,7 +28,6 @@ class AppointmentDetailController extends GetxController
   @override
   void onInit() async {
     super.onInit();
-    print('kepanggil gaes');
     DoctorService().getDoctorDetail(selectedTimeslot.doctorid!).then(
       (doc) {
         selectedTimeslot.doctor = doc;
@@ -36,9 +35,10 @@ class AppointmentDetailController extends GetxController
         change(selectedTimeslot, status: RxStatus.success());
         if (selectedTimeslot.status == 'refund') {
           Get.defaultDialog(
-              title: 'Appointment Canceled',
+              title: 'Appointment Canceled'.tr,
               content: Text(
-                  'the doctor has canceled the appointment, and your payment has been refunded'),
+                  'the doctor has canceled the appointment, and your payment has been refunded'
+                      .tr),
               onConfirm: () {
                 Get.back();
               });
@@ -82,12 +82,14 @@ class AppointmentDetailController extends GetxController
       if (selectedTimeslot.status == 'refund') {
         Fluttertoast.showToast(
             msg:
-                'the doctor has canceled the appointment, and your payment has been refunded',
+                'the doctor has canceled the appointment, and your payment has been refunded'
+                    .tr,
             toastLength: Toast.LENGTH_LONG);
       } else {
         Fluttertoast.showToast(
             msg:
-                'the doctor has not started the meeting session, this button will automatically turn on when the doctor has started it',
+                'the doctor has not started the meeting session, this button will automatically turn on when the doctor has started it'
+                    .tr,
             toastLength: Toast.LENGTH_LONG);
       }
     }

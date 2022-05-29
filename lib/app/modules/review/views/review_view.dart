@@ -14,7 +14,7 @@ class ReviewView extends GetView<ReviewController> {
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       child: Scaffold(
         appBar: AppBar(
-          title: Text('Review Doctor'),
+          title: Text('Review Doctor'.tr),
           centerTitle: true,
         ),
         body: SingleChildScrollView(
@@ -36,7 +36,8 @@ class ReviewView extends GetView<ReviewController> {
                   Divider(),
                   TextField(
                     decoration: InputDecoration(
-                        border: OutlineInputBorder(), hintText: 'Your Review'),
+                        border: OutlineInputBorder(),
+                        hintText: 'Your Review'.tr),
                     maxLines: 10,
                     textInputAction: TextInputAction.done,
                     onSubmitted: (value) => controller.review = value,
@@ -65,7 +66,7 @@ class ReviewView extends GetView<ReviewController> {
                       onTap: () {
                         controller.saveReiew();
                       },
-                      text: "Send")
+                      text: "Send".tr)
                 ],
               ),
             ),

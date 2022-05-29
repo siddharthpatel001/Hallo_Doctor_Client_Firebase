@@ -43,7 +43,7 @@ class HomeView extends GetView<HomeController> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Text(
-                                    'Welcome Back,',
+                                    'Welcome Back,'.tr,
                                     style: mWelcomeTitleStyle,
                                   ),
                                   Text(
@@ -147,21 +147,21 @@ class HomeView extends GetView<HomeController> {
                         children: [
                           IconCard(
                             iconData: Icons.category,
-                            text: "Doctor Specialist",
+                            text: "Doctor Specialist".tr,
                             onTap: () {
                               controller.toDoctorCategory();
                             },
                           ),
                           IconCard(
                             iconData: Icons.list_alt_rounded,
-                            text: "Top Rated Doctor",
+                            text: "Top Rated Doctor".tr,
                             onTap: () {
                               controller.toTopRatedDoctor();
                             },
                           ),
                           IconCard(
                             iconData: Icons.search,
-                            text: "Search Doctor",
+                            text: "Search Doctor".tr,
                             onTap: () {
                               controller.toSearchDoctor();
                             },
@@ -177,7 +177,7 @@ class HomeView extends GetView<HomeController> {
                           Padding(
                             padding: const EdgeInsets.only(left: 20),
                             child: Text(
-                              'Top Rated Doctor',
+                              'Top Rated Doctor'.tr,
                               style: TextStyle(fontWeight: FontWeight.bold),
                             ),
                           ),
@@ -187,7 +187,7 @@ class HomeView extends GetView<HomeController> {
                               onPressed: () {
                                 controller.toTopRatedDoctor();
                               },
-                              child: Text('View All',
+                              child: Text('View All'.tr,
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       color: Colors.blue[300])),
@@ -210,13 +210,13 @@ class HomeView extends GetView<HomeController> {
                               default:
                                 if (snapshot.hasError) {
                                   return Center(
-                                    child: Text(
-                                        'error + ' + snapshot.error.toString()),
+                                    child: Text('error '.tr +
+                                        snapshot.error.toString()),
                                   );
                                 } else if (snapshot.data!.isEmpty) {
                                   return Center(
                                     child: Text(
-                                      'top rated doctor is empty ',
+                                      'Top Rated Doctor is empty '.tr,
                                     ),
                                   );
                                 } else {

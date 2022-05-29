@@ -82,7 +82,7 @@ class VideoCallView extends GetView<VideoCallController> {
       );
     } else {
       return Text(
-        'Please wait for remote user to join',
+        'Please wait for remote user to join'.tr,
         textAlign: TextAlign.center,
       );
     }

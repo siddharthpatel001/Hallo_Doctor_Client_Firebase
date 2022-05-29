@@ -17,7 +17,7 @@ class DetailOrderView extends GetView<DetailOrderController> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('Detail Order'),
+          title: Text('Detail Order'.tr),
           centerTitle: true,
         ),
         body: Padding(
@@ -27,14 +27,15 @@ class DetailOrderView extends GetView<DetailOrderController> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Hi ' + controller.username.value,
+                      'Hi '.tr + controller.username.value,
                       style: GoogleFonts.poppins(
                           fontWeight: FontWeight.w600,
                           fontSize: 14,
                           color: mTitleColor),
                     ),
                     Text(
-                      'before making a payment, make sure the items below are correct',
+                      'before making a payment, make sure the items below are correct'
+                          .tr,
                       style: GoogleFonts.poppins(
                           fontWeight: FontWeight.w400,
                           fontSize: 12,
@@ -59,7 +60,7 @@ class DetailOrderView extends GetView<DetailOrderController> {
                             alignment: Alignment.centerRight,
                             padding: EdgeInsets.only(right: 30),
                             child: Text(
-                              'Total : ' +
+                              'Total : '.tr +
                                   currencySign +
                                   controller.selectedTimeSlot.price.toString(),
                               style: GoogleFonts.poppins(
@@ -102,7 +103,7 @@ class DetailOrderView extends GetView<DetailOrderController> {
                           color: secondaryColor,
                         ),
                         child: Text(
-                          'Confirm',
+                          'Confirm'.tr,
                           style: TextStyle(color: Colors.white),
                         ),
                       ),
@@ -114,7 +115,7 @@ class DetailOrderView extends GetView<DetailOrderController> {
   }
 
   Widget detailOrderTable() {
-    final column = ['Item', 'Duration', 'Time', 'Price'];
+    final column = ['Item'.tr, 'Duration'.tr, 'Time'.tr, 'Price'.tr];
     final listOrderItem = [controller.buildOrderDetail()];
     return DataTable(
       columns: getColumn(column),

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hallo_doctor_client/app/modules/profile/views/widgets/header_curve_widget.dart';
 import 'package:hallo_doctor_client/app/modules/profile/views/widgets/profile_button.dart';
+import 'package:hallo_doctor_client/app/utils/localization.dart';
 import '../controllers/profile_controller.dart';
 import 'widgets/display_image_widget.dart';
 
@@ -14,7 +15,7 @@ class ProfileView extends GetView<ProfileController> {
         backgroundColor: Colors.blue[300],
         elevation: 0,
         title: Text(
-          'Profile',
+          'Profile'.tr,
           style: TextStyle(color: Colors.white),
         ),
         centerTitle: true,
@@ -58,7 +59,7 @@ class ProfileView extends GetView<ProfileController> {
                     ),
                     ProfileButton(
                       icon: Icons.password,
-                      text: 'Change Password',
+                      text: 'Change Password'.tr,
                       onTap: () {
                         controller.toChangePassword();
                       },
@@ -72,16 +73,17 @@ class ProfileView extends GetView<ProfileController> {
                         onPressed: () {
                           controller.logout();
                         },
-                        child: Text('logout'),
+                        child: Text('Logout'.tr),
                       ),
                     ),
                     //uncomment if you wanto test something
-                    // ElevatedButton(
-                    //   onPressed: () {
-                    //     controller.testButton();
-                    //   },
-                    //   child: Text('test button'),
-                    // )
+                    ElevatedButton(
+                      onPressed: () {
+                        //controller.testButton();
+                        LocalizationService().changeLocale('France');
+                      },
+                      child: Text('test button'),
+                    )
                   ],
                 ),
               ),
@@ -90,7 +92,8 @@ class ProfileView extends GetView<ProfileController> {
               ),
               Expanded(
                 child: Center(
-                  child: Text('App Version : ' + controller.appVersion.value),
+                  child:
+                      Text('App Version : '.tr + controller.appVersion.value),
                 ),
               ),
             ],

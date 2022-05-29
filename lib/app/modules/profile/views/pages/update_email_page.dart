@@ -17,7 +17,7 @@ class UpdateEmailPage extends GetView<ProfileController> {
           backgroundColor: Colors.transparent,
           elevation: 0,
           title: Text(
-            'Update Email',
+            'Update Email'.tr,
           ),
           centerTitle: true,
           iconTheme: IconThemeData(color: Colors.black),
@@ -30,7 +30,7 @@ class UpdateEmailPage extends GetView<ProfileController> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Text(
-                  "What's Your New Email Address?",
+                  'What\'s Your New Email Address?'.tr,
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,

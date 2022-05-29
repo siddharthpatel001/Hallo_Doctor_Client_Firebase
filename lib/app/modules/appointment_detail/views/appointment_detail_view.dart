@@ -13,7 +13,7 @@ class AppointmentDetailView extends GetView<AppointmentDetailController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: Text('Consultation Detail'),
+          title: Text('Consultation Detail'.tr),
           centerTitle: true,
           actions: [
             //list if widget in appbar actions
@@ -23,7 +23,7 @@ class AppointmentDetailView extends GetView<AppointmentDetailController> {
                 PopupMenuItem<int>(
                   value: 0,
                   child: Text(
-                    "Reschedule Appointment",
+                    "Reschedule Appointment".tr,
                   ),
                 ),
               ],
@@ -32,9 +32,10 @@ class AppointmentDetailView extends GetView<AppointmentDetailController> {
                   {
                     //cancel appointment click
                     Get.defaultDialog(
-                        title: 'Reschedule Appointment',
+                        title: 'Reschedule Appointment'.tr,
                         content: Text(
-                          'You can only reschedule this appointment once, Are you sure want to reschedule this appointment',
+                          'You can only reschedule this appointment once, Are you sure want to reschedule this appointment'
+                              .tr,
                           textAlign: TextAlign.center,
                         ),
                         onCancel: () {},
@@ -56,7 +57,7 @@ class AppointmentDetailView extends GetView<AppointmentDetailController> {
                 Container(
                   margin: EdgeInsets.only(top: 10),
                   child: Text(
-                    'Appointment With',
+                    'Appointment With'.tr,
                     style: Styles.appointmentDetailTextStyle,
                   ),
                 ),
@@ -74,7 +75,7 @@ class AppointmentDetailView extends GetView<AppointmentDetailController> {
                 Container(
                   margin: EdgeInsets.only(top: 10),
                   child: Text(
-                    'Schedule Detail',
+                    'Schedule Detail'.tr,
                     style: Styles.appointmentDetailTextStyle,
                   ),
                 ),
@@ -102,26 +103,26 @@ class AppointmentDetailView extends GetView<AppointmentDetailController> {
                         children: [
                           TableRow(children: [
                             SizedBox(
-                                height: 50, child: Text('Appointment Time')),
+                                height: 50, child: Text('Appointment Time'.tr)),
                             SizedBox(
                                 height: 50,
                                 child: Text(TimeFormat().formatDate(
                                     controller.selectedTimeslot.timeSlot!))),
                           ]),
                           TableRow(children: [
-                            SizedBox(height: 50, child: Text('Duration')),
+                            SizedBox(height: 50, child: Text('Duration'.tr)),
                             SizedBox(
                                 height: 50,
                                 child: Text(': ' +
                                     controller.selectedTimeslot.duration
                                         .toString() +
-                                    ' Minute')),
+                                    ' Minute'.tr)),
                           ]),
                           TableRow(
                             children: [
                               SizedBox(
                                 height: 50,
-                                child: Text('Price'),
+                                child: Text('Price'.tr),
                               ),
                               SizedBox(
                                 height: 50,
@@ -129,7 +130,7 @@ class AppointmentDetailView extends GetView<AppointmentDetailController> {
                                   ': \$' +
                                       controller.selectedTimeslot.price
                                           .toString() +
-                                      ' (Paid)',
+                                      ' (Paid)'.tr,
                                 ),
                               ),
                             ],
@@ -138,7 +139,7 @@ class AppointmentDetailView extends GetView<AppointmentDetailController> {
                             children: [
                               SizedBox(
                                 height: 50,
-                                child: Text('Status'),
+                                child: Text('Status'.tr),
                               ),
                               SizedBox(
                                 height: 50,
@@ -157,21 +158,24 @@ class AppointmentDetailView extends GetView<AppointmentDetailController> {
                       function: () {
                         controller.startVideoCall();
                       },
-                      text: 'Start Consultation',
+                      text: 'Start Consultation'.tr,
                       active: controller.videoCallStatus.value,
                       nonActiveMsg:
-                          'the doctor has canceled the appointment, and your payment has been refunded',
+                          'the doctor has canceled the appointment, and your payment has been refunded'
+                              .tr,
                     )),
                 SizedBox(
                   height: 10,
                 ),
                 controller.selectedTimeslot.status == 'refund'
                     ? Text(
-                        'the doctor has canceled the appointment, and your payment has been refunded',
+                        'the doctor has canceled the appointment, and your payment has been refunded'
+                            .tr,
                         style: Styles.greyTextInfoStyle,
                       )
                     : Text(
-                        'the start consultation button will be active when the doctor starts the consultation',
+                        'the start consultation button will be active when the doctor starts the consultation'
+                            .tr,
                         style: Styles.greyTextInfoStyle,
                       ),
               ],

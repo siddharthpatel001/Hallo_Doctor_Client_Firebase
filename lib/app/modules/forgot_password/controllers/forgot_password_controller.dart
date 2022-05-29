@@ -10,7 +10,7 @@ class ForgotPasswordController extends GetxController {
   void resetPassword(String email) {
     AuthService().resetPassword(email).then((value) {
       Fluttertoast.showToast(
-          msg: 'Please check your email for reset your password',
+          msg: 'Please check your email for reset your password'.tr,
           toastLength: Toast.LENGTH_LONG);
       roundedBtnController.success();
     });

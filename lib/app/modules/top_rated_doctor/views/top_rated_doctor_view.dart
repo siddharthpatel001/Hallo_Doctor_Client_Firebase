@@ -11,7 +11,7 @@ class TopRatedDoctorView extends GetView<TopRatedDoctorController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Top Rated Doctor'),
+        title: Text('Top Rated Doctor'.tr),
         centerTitle: true,
       ),
       body: Container(
@@ -38,7 +38,7 @@ class TopRatedDoctorView extends GetView<TopRatedDoctorController> {
                     ),
                 onEmpty: Center(
                     child: EmptyList(
-                        msg: 'No Doctor Registered in this Category'))),
+                        msg: 'No Doctor Registered in this Category'.tr))),
           )
         ]),
       ),

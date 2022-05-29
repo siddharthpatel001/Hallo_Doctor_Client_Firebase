@@ -14,7 +14,7 @@ class ConsultationDatePickerView
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Chose Timeslot'),
+        title: Text('Chose Timeslot'.tr),
         centerTitle: true,
       ),
       body: Container(
@@ -23,7 +23,7 @@ class ConsultationDatePickerView
           Container(
             alignment: Alignment.centerLeft,
             child: Text(
-              "Chose Date",
+              'Chose Date'.tr,
               style: titleTextStyle,
             ),
           ),
@@ -48,7 +48,7 @@ class ConsultationDatePickerView
           Container(
             alignment: Alignment.centerLeft,
             child: Text(
-              "Chose Time",
+              'Chose Time'.tr,
               style: titleTextStyle,
             ),
           ),
@@ -85,7 +85,7 @@ class ConsultationDatePickerView
                               timeStartFormat +
                                   ' - ' +
                                   timeEndFormat +
-                                  '\n Available',
+                                  '\n Available'.tr,
                               textAlign: TextAlign.center,
                             ),
                             decoration: (controller.selectedTimeSlot.value ==
@@ -110,7 +110,7 @@ class ConsultationDatePickerView
                           timeStartFormat +
                               ' - ' +
                               timeEndFormat +
-                              '\n Unavailable',
+                              '\n Unavailable'.tr,
                           textAlign: TextAlign.center,
                           style: GoogleFonts.nunito(color: Colors.white),
                         ),
@@ -130,7 +130,7 @@ class ConsultationDatePickerView
             child: InkWell(
               onTap: () {
                 if (controller.selectedTimeSlot.value.timeSlotId == null) {
-                  Fluttertoast.showToast(msg: 'Please select time slot');
+                  Fluttertoast.showToast(msg: 'Please select time slot'.tr);
                 } else {
                   controller.confirm();
                 }
@@ -143,7 +143,7 @@ class ConsultationDatePickerView
                   color: secondaryColor,
                 ),
                 child: Text(
-                  'Confirm ',
+                  'Confirm'.tr,
                   style: TextStyle(color: Colors.white),
                 ),
               ),

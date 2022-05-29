@@ -15,7 +15,7 @@ class EditImagePage extends GetView<ProfileController> {
         backgroundColor: Colors.transparent,
         elevation: 0,
         title: Text(
-          'Edit Image',
+          'Edit Image'.tr,
           //style: appbarTextStyle,
         ),
         centerTitle: true,
@@ -27,8 +27,8 @@ class EditImagePage extends GetView<ProfileController> {
         children: <Widget>[
           SizedBox(
               width: 330,
-              child: const Text(
-                "Upload a photo of yourself ",
+              child: Text(
+                "Upload a photo of yourself ".tr,
                 style: TextStyle(
                   fontSize: 23,
                   fontWeight: FontWeight.bold,
@@ -74,8 +74,8 @@ class EditImagePage extends GetView<ProfileController> {
                         if (imageFile == null) return;
                         controller.updateProfilePic(imageFile!);
                       },
-                      child: const Text(
-                        'Update',
+                      child: Text(
+                        'Update'.tr,
                         style: TextStyle(fontSize: 15),
                       ),
                     ),

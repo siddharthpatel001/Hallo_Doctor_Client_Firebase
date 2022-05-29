@@ -27,7 +27,7 @@ class DetailDoctorController extends GetxController with StateMixin<Doctor> {
   void toChatDoctor() async {
     String doctorUserId = await DoctorService().getUserId(selectedDoctor);
     if (doctorUserId.isEmpty) {
-      Fluttertoast.showToast(msg: 'doctor no longger exist');
+      Fluttertoast.showToast(msg: 'Doctor no longger exist'.tr);
       return;
     }
     final otherUser = types.User(

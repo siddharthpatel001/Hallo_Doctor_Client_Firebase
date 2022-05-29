@@ -12,7 +12,7 @@ class AppointmentView extends GetView<AppointmentController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Appointment'),
+        title: Text('Appointment'.tr),
         centerTitle: true,
       ),
       body: RefreshIndicator(
@@ -36,10 +36,10 @@ class AppointmentView extends GetView<AppointmentController> {
                       backgroundImage: CachedNetworkImageProvider(
                           listTimeslot[index].doctor!.doctorPicture!),
                     ),
-                    title: Text('Appointment with ' +
+                    title: Text('Appointment with '.tr +
                         listTimeslot[index].doctor!.doctorName!),
                     subtitle: Text(
-                      'at ' +
+                      'at '.tr +
                           DateFormat('EEEE, dd, MMMM')
                               .format(listTimeslot[index].timeSlot!),
                     ),
@@ -49,7 +49,7 @@ class AppointmentView extends GetView<AppointmentController> {
               },
             ),
             onEmpty: Center(
-              child: EmptyList(msg: 'you don\'t have an appointment yet'),
+              child: EmptyList(msg: 'you don\'t have an appointment yet'.tr),
             ),
           ),
         ),

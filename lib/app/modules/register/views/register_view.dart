@@ -48,7 +48,7 @@ class RegisterView extends GetView<RegisterController> {
                         },
                         validator: ((value) {
                           if (value!.length < 6) {
-                            return 'name must be  6 or more characters';
+                            return 'Name must be  6 or more characters'.tr;
                           } else {
                             return null;
                           }
@@ -104,7 +104,8 @@ class RegisterView extends GetView<RegisterController> {
                                 },
                                 validator: ((value) {
                                   if (value!.length < 3) {
-                                    return 'Password must be more thand four characters';
+                                    return 'Password must be more thand four characters'
+                                        .tr;
                                   } else {
                                     return null;
                                   }
@@ -141,7 +142,7 @@ class RegisterView extends GetView<RegisterController> {
                           onTap: () {
                             controller.signUpUser();
                           },
-                          text: 'Register Now'),
+                          text: 'Register Now'.tr),
                       SizedBox(height: height * .01),
                       DividerOr(),
                       Container(
@@ -156,8 +157,8 @@ class RegisterView extends GetView<RegisterController> {
                       ),
                       LabelButton(
                         onTap: () {},
-                        title: 'Already have an account ?',
-                        subTitle: 'Login',
+                        title: 'Already have an account ?'.tr,
+                        subTitle: 'Login'.tr,
                       ),
                     ],
                   ),

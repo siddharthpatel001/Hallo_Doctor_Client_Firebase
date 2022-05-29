@@ -18,7 +18,7 @@ class ChangePasswordPage extends GetView<ProfileController> {
           backgroundColor: Colors.transparent,
           elevation: 0,
           title: Text(
-            'Change Password',
+            'Change Password'.tr,
           ),
           centerTitle: true,
           iconTheme: IconThemeData(color: Colors.black),
@@ -53,7 +53,8 @@ class ChangePasswordPage extends GetView<ProfileController> {
                           FormBuilderValidators.required(context),
                           FormBuilderValidators.minLength(context, 3)
                         ]),
-                        decoration: InputDecoration(labelText: 'New Password'),
+                        decoration:
+                            InputDecoration(labelText: 'New Password'.tr),
                         name: 'newPassword',
                         keyboardType: TextInputType.visiblePassword,
                         onSaved: (value) =>
@@ -74,7 +75,7 @@ class ChangePasswordPage extends GetView<ProfileController> {
                             FormBuilderValidators.minLength(context, 3)
                           ]),
                           decoration: InputDecoration(
-                              labelText: 'Confirm New Password'),
+                              labelText: 'Confirm New Password'.tr),
                           name: 'confirmNewPassword',
                           keyboardType: TextInputType.visiblePassword,
                           onEditingComplete: () {
@@ -104,7 +105,7 @@ class ChangePasswordPage extends GetView<ProfileController> {
                                   _formKey.currentState!
                                       .value['confirmNewPassword']);
                             } else {
-                              print("validation failed");
+                              print('Validation Failed');
                             }
                           },
                           text: 'Save'),

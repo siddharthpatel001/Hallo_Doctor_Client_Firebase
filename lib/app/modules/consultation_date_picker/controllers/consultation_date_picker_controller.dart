@@ -48,7 +48,7 @@ class ConsultationDatePickerController extends GetxController
         await TimeSlotService()
             .rescheduleTimeslot(Get.arguments[1], selectedTimeSlot.value);
         Fluttertoast.showToast(
-            msg: 'Appointment has been successfully rescheduled');
+            msg: 'Appointment has been successfully rescheduled'.tr);
         EasyLoading.dismiss();
         Get.back();
       } else {

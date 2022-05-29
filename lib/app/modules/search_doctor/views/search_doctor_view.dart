@@ -12,7 +12,7 @@ class SearchDoctorView extends GetView<SearchDoctorController> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('Search Doctor'),
+          title: Text('Search Doctor'.tr),
           centerTitle: true,
           actions: [
             IconButton(
@@ -32,7 +32,7 @@ class SearchDoctorView extends GetView<SearchDoctorController> {
             child: controller.doctor.value.doctorName == null
                 ? Center(
                     child: Text(
-                      'Search Doctor',
+                      'Search Doctor'.tr,
                       style: TextStyle(fontSize: 20),
                     ),
                   )

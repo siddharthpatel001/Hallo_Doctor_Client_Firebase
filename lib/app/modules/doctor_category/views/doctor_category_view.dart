@@ -14,7 +14,7 @@ class DoctorCategoryView extends GetView<DoctorCategoryController> {
         backgroundColor: mBackgroundColor,
         elevation: 0,
         title: Text(
-          'Doctor Specialist',
+          'Doctor Specialist'.tr,
           style: TextStyle(color: mTitleColor),
         ),
         centerTitle: true,

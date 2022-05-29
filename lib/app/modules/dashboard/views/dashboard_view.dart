@@ -20,50 +20,53 @@ class DashboardView extends GetView<DashboardController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        bottomNavigationBar: Obx(() => BottomNavigationBar(
-              type: BottomNavigationBarType.fixed,
-              selectedItemColor: Colors.blue[700],
-              unselectedItemColor: Colors.blue[300],
-              items: [
-                BottomNavigationBarItem(
-                    icon: Icon(
-                      Icons.home,
-                      color: Colors.blue[500],
-                    ),
-                    label: "Home"),
-                BottomNavigationBarItem(
-                    icon: Icon(
-                      Icons.contacts,
-                      color: Colors.blue[500],
-                    ),
-                    label: "Doctor"),
-                BottomNavigationBarItem(
-                    icon: Icon(
-                      Icons.video_camera_front,
-                      color: Colors.blue[500],
-                    ),
-                    label: "Appointment"),
-                BottomNavigationBarItem(
-                    icon: Icon(
-                      Icons.message,
-                      color: Colors.blue[500],
-                    ),
-                    label: "Chat"),
-                BottomNavigationBarItem(
-                    icon: Icon(
-                      Icons.person,
-                      color: Colors.blue[500],
-                    ),
-                    label: "Profile"),
-              ],
-              currentIndex: controller.selectedIndex,
-              onTap: (index) {
-                controller.selectedIndex = index;
-              },
-            )),
-        body: Obx(() => Center(
-              child: IndexedStack(
-                  index: controller.selectedIndex, children: bodyContent),
-            ),),);
+      bottomNavigationBar: Obx(() => BottomNavigationBar(
+            type: BottomNavigationBarType.fixed,
+            selectedItemColor: Colors.blue[700],
+            unselectedItemColor: Colors.blue[300],
+            items: [
+              BottomNavigationBarItem(
+                  icon: Icon(
+                    Icons.home,
+                    color: Colors.blue[500],
+                  ),
+                  label: "Home".tr),
+              BottomNavigationBarItem(
+                  icon: Icon(
+                    Icons.contacts,
+                    color: Colors.blue[500],
+                  ),
+                  label: "Doctor".tr),
+              BottomNavigationBarItem(
+                  icon: Icon(
+                    Icons.video_camera_front,
+                    color: Colors.blue[500],
+                  ),
+                  label: "Appointment".tr),
+              BottomNavigationBarItem(
+                  icon: Icon(
+                    Icons.message,
+                    color: Colors.blue[500],
+                  ),
+                  label: "Chat".tr),
+              BottomNavigationBarItem(
+                  icon: Icon(
+                    Icons.person,
+                    color: Colors.blue[500],
+                  ),
+                  label: "Profile".tr),
+            ],
+            currentIndex: controller.selectedIndex,
+            onTap: (index) {
+              controller.selectedIndex = index;
+            },
+          )),
+      body: Obx(
+        () => Center(
+          child: IndexedStack(
+              index: controller.selectedIndex, children: bodyContent),
+        ),
+      ),
+    );
   }
 }

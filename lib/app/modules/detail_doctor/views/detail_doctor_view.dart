@@ -12,7 +12,7 @@ class DetailDoctorView extends GetView<DetailDoctorController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Doctor'),
+        title: Text('Doctor'.tr),
         centerTitle: true,
       ),
       body: Stack(children: [
@@ -34,7 +34,7 @@ class DetailDoctorView extends GetView<DetailDoctorController> {
                     height: 7,
                   ),
                   Text(
-                    'Cardiologist',
+                    doctor.doctorCategory!.categoryName!,
                     style: doctorCategoryStyle,
                   ),
                   SizedBox(
@@ -54,7 +54,7 @@ class DetailDoctorView extends GetView<DetailDoctorController> {
                   Container(
                     width: double.infinity,
                     child: Text(
-                      'Biography',
+                      'Biography'.tr,
                       style: titleTextStyle,
                     ),
                   ),
@@ -67,7 +67,7 @@ class DetailDoctorView extends GetView<DetailDoctorController> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'Review',
+                        'Review'.tr,
                         style: titleTextStyle,
                       ),
                       SizedBox(
@@ -75,7 +75,7 @@ class DetailDoctorView extends GetView<DetailDoctorController> {
                       ),
                       TextButton(
                         onPressed: () {},
-                        child: Text('View All'),
+                        child: Text('View All'.tr),
                       )
                     ],
                   ),
@@ -140,7 +140,7 @@ class DetailDoctorView extends GetView<DetailDoctorController> {
                             color: secondaryColor,
                           ),
                           child: Text(
-                            'Book Consultation',
+                            'Book Consultation'.tr,
                             style: TextStyle(color: Colors.white),
                           ),
                         ),

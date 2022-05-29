@@ -15,7 +15,7 @@ class ListUser extends GetView<ChatController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('list users'),
+        title: Text('List Users'.tr),
       ),
       body: StreamBuilder<List<types.User>>(
         stream: FirebaseChatCore.instance.users(),
@@ -27,7 +27,7 @@ class ListUser extends GetView<ChatController> {
               margin: const EdgeInsets.only(
                 bottom: 200,
               ),
-              child: const Text('No users'),
+              child: Text('No users'.tr),
             );
           }
 

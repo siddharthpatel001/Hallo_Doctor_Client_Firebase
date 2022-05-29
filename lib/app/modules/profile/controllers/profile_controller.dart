@@ -46,11 +46,11 @@ class ProfileController extends GetxController {
 
   void logout() async {
     Get.defaultDialog(
-      title: 'Logout',
-      middleText: 'are you sure you want to Logout',
+      title: 'Logout'.tr,
+      middleText: 'Are you sure you want to Logout'.tr,
       radius: 15,
-      textCancel: 'Cancel',
-      textConfirm: 'Logout',
+      textCancel: 'Cancel'.tr,
+      textConfirm: 'Logout'.tr,
       onConfirm: () {
         authService.logout().then(
               (value) => Get.offAllNamed('/login'),
@@ -110,7 +110,7 @@ class ProfileController extends GetxController {
       currentPassword = '';
       newPassword = '';
       Get.back();
-      Fluttertoast.showToast(msg: 'Successfully change password');
+      Fluttertoast.showToast(msg: 'Successfully change password'.tr);
     } catch (err) {
       Fluttertoast.showToast(msg: err.toString());
     }

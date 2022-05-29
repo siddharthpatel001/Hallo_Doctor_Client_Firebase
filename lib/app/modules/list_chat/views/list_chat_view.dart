@@ -13,7 +13,7 @@ class ListChatView extends GetView<ListChatController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Chat'),
+        title: Text('Chat'.tr),
         centerTitle: true,
       ),
       body: StreamBuilder<List<types.Room>>(
@@ -26,7 +26,7 @@ class ListChatView extends GetView<ListChatController> {
               margin: const EdgeInsets.only(
                 bottom: 200,
               ),
-              child: const Text('No Chat'),
+              child: Text('The chat is empty'.tr),
             );
           }
           return ListView.builder(

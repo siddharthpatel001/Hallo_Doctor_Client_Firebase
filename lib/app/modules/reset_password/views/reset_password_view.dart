@@ -9,12 +9,12 @@ class ResetPasswordView extends GetView<ResetPasswordController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('ResetPasswordView'),
+        title: Text('Reset Password'.tr),
         centerTitle: true,
       ),
       body: Center(
         child: Text(
-          'ResetPasswordView is working',
+          'Reset Password View is working',
           style: TextStyle(fontSize: 20),
         ),
       ),

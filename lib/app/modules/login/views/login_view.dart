@@ -39,7 +39,7 @@ class LoginView extends GetView<LoginController> {
                           },
                           validator: ((value) {
                             if (value!.length < 3) {
-                              return 'name must be more than two characters';
+                              return 'Name must be more than two characters'.tr;
                             } else {
                               return null;
                             }
@@ -85,7 +85,7 @@ class LoginView extends GetView<LoginController> {
                                 )),
                             validator: ((value) {
                               if (value!.isEmpty) {
-                                return 'Password cannot be empty';
+                                return 'Password cannot be empty'.tr;
                               } else {
                                 return null;
                               }
@@ -105,9 +105,11 @@ class LoginView extends GetView<LoginController> {
                     child: Container(
                       padding: EdgeInsets.symmetric(vertical: 10),
                       alignment: Alignment.centerRight,
-                      child: Text('Forgot Password ?',
-                          style: TextStyle(
-                              fontSize: 14, fontWeight: FontWeight.w500),),
+                      child: Text(
+                        'Forgot Password ?'.tr,
+                        style: TextStyle(
+                            fontSize: 14, fontWeight: FontWeight.w500),
+                      ),
                     ),
                   ),
                   SizedBox(height: height * .020),
@@ -115,7 +117,7 @@ class LoginView extends GetView<LoginController> {
                       onTap: () {
                         controller.login();
                       },
-                      text: 'Login'),
+                      text: 'Login'.tr),
                   SizedBox(
                     height: 10,
                   ),
@@ -138,8 +140,8 @@ class LoginView extends GetView<LoginController> {
                     onTap: () {
                       Get.toNamed('/register');
                     },
-                    title: 'Don\'t have an account, ',
-                    subTitle: 'Register',
+                    title: 'Don\'t have an account, '.tr,
+                    subTitle: 'Register'.tr,
                   ),
                 ],
               ),

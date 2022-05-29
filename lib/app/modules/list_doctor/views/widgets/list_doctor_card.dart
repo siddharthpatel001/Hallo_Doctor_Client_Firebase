@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:get/get.dart';
 import 'package:hallo_doctor_client/app/utils/constants/style_constants.dart';
 
 class DoctorCard extends StatelessWidget {
@@ -45,7 +46,7 @@ class DoctorCard extends StatelessWidget {
                       height: 15,
                     ),
                     Text(
-                      'Price',
+                      'Price'.tr,
                       style: priceTextStyle,
                     ),
                     SizedBox(
@@ -114,7 +115,7 @@ class DoctorCard extends StatelessWidget {
                             borderRadius: BorderRadius.all(Radius.circular(20)),
                             color: Colors.blue),
                         child: Text(
-                          'Book Consultation',
+                          'Book Consultation'.tr,
                           style: TextStyle(color: Colors.white),
                         ),
                       ),

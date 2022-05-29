@@ -12,7 +12,7 @@ class PaymentSuccessView extends GetView<PaymentSuccessController> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('PaymentSuccessView'),
+          title: Text('Payment Success'.tr),
           centerTitle: true,
         ),
         body: Container(
@@ -32,7 +32,7 @@ class PaymentSuccessView extends GetView<PaymentSuccessController> {
                     controller.animController.forward();
                   })),
               Text(
-                'Payment Successfull',
+                'Payment Successfull'.tr,
                 style: GoogleFonts.poppins(
                     fontWeight: FontWeight.w600,
                     fontSize: 17,
@@ -42,7 +42,8 @@ class PaymentSuccessView extends GetView<PaymentSuccessController> {
                 height: 10,
               ),
               Text(
-                'Your payment has been processed! \n Details of transaction are included below',
+                'Your payment has been processed! \n Details of transaction are included below'
+                    .tr,
                 style: GoogleFonts.poppins(
                     fontWeight: FontWeight.w400,
                     fontSize: 12,
@@ -55,7 +56,7 @@ class PaymentSuccessView extends GetView<PaymentSuccessController> {
               Obx(() => Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      Text('TOTAL AMOUNT PAID'),
+                      Text('TOTAL AMOUNT PAID'.tr),
                       Text(currencySign + controller.price.value.toString())
                     ],
                   )),
@@ -65,7 +66,7 @@ class PaymentSuccessView extends GetView<PaymentSuccessController> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  Text('TRANSACTION DATE'),
+                  Text('TRANSACTION DATE'.tr),
                   Text(DateTime.now().toLocal().toString())
                 ],
               ),
@@ -76,7 +77,7 @@ class PaymentSuccessView extends GetView<PaymentSuccessController> {
                   onPressed: () {
                     controller.goHome();
                   },
-                  child: Text('Go Home'))
+                  child: Text('Go Home'.tr))
             ],
           ),
         ));

@@ -77,13 +77,13 @@ class ProfileView extends GetView<ProfileController> {
                       ),
                     ),
                     //uncomment if you wanto test something
-                    ElevatedButton(
-                      onPressed: () {
-                        //controller.testButton();
-                        LocalizationService().changeLocale('France');
-                      },
-                      child: Text('test button'),
-                    )
+                    // ElevatedButton(
+                    //   onPressed: () {
+                    //     //controller.testButton();
+                    //     LocalizationService().changeLocale('France');
+                    //   },
+                    //   child: Text('test button'),
+                    // )
                   ],
                 ),
               ),

@@ -56,6 +56,7 @@ dependencies:
   flutter_callkit_incoming: ^1.0.1+8
   json_serializable: ^6.2.0
   json_annotation: ^4.5.0
+  image_cropper: ^2.0.3
 
 dev_dependencies:
   flutter_lints: ^1.0.0

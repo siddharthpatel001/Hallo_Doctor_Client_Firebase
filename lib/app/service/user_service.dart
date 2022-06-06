@@ -53,6 +53,10 @@ class UserService {
   Future updateProfileUrl(String url) async {
     try {
       currentUser!.updatePhotoURL(url);
+      FirebaseFirestore.instance
+          .collection('Users')
+          .doc(currentUser!.uid)
+          .update({'photoUrl': url});
     } catch (err) {
       Future.error(err.toString());
     }

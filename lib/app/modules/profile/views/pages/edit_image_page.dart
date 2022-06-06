@@ -51,7 +51,7 @@ class EditImagePage extends GetView<ProfileController> {
                       aspectRatio: CropAspectRatio(ratioX: 1, ratioY: 1),
                       aspectRatioPresets: [CropAspectRatioPreset.square]);
                   if (imageCropped == null) return;
-                  imageFile = File(imageCropped!.path);
+                  imageFile = File(imageCropped.path);
                   controller.update();
                 },
                 child: GetBuilder<ProfileController>(

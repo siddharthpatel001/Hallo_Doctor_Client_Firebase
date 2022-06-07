@@ -40,7 +40,8 @@ class ConsultationDatePickerView
               daysCount: 10,
               selectionColor: secondaryColor,
               onDateChange: (date) {
-                controller.updateScheduleAtDate(date.day);
+                controller.updateScheduleAtDate(
+                    date.day, date.month, date.year);
               },
             ),
           ),

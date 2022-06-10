@@ -23,7 +23,8 @@ class ConsultationDatePickerController extends GetxController
     print('is Reschedule ' + isReschedule.toString());
     DoctorService().getDoctorTimeSlot(doctor).then((timeSlot) {
       allTimeSlot = timeSlot;
-      updateScheduleAtDate(DateTime.now().day,DateTime.now().month,DateTime.now().year);
+      updateScheduleAtDate(
+          DateTime.now().day, DateTime.now().month, DateTime.now().year);
     }).onError((error, stackTrace) {
       change([], status: RxStatus.error(error.toString()));
     });
@@ -32,9 +33,10 @@ class ConsultationDatePickerController extends GetxController
   @override
   void onClose() {}
 
-  void updateScheduleAtDate(int date,int month,int year) {
+  void updateScheduleAtDate(int date, int month, int year) {
     var schedule = allTimeSlot
-        .where((timeSlot) => timeSlot.timeSlot!.day.isEqual(date) &&
+        .where((timeSlot) =>
+            timeSlot.timeSlot!.day.isEqual(date) &&
             timeSlot.timeSlot!.month.isEqual(month) &&
             timeSlot.timeSlot!.year.isEqual(year))
         .toList();

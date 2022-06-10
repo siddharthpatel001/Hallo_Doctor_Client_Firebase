@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:hallo_doctor_client/app/modules/detail_doctor/views/widgets/review_card.dart';
 import 'package:hallo_doctor_client/app/utils/constants/style_constants.dart';
 
+import '../../../utils/constants/constants.dart';
 import '../controllers/detail_doctor_controller.dart';
 
 class DetailDoctorView extends GetView<DetailDoctorController> {
@@ -116,10 +117,17 @@ class DetailDoctorView extends GetView<DetailDoctorController> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Flexible(
-                  child: Text(
-                    '\$ 10',
-                    style: priceNumberTextStyle,
-                  ),
+                  child: controller.selectedDoctor.doctorPrice != null
+                      ? Text(
+                          currencySign +
+                              ' ' +
+                              controller.selectedDoctor.doctorPrice!.toString(),
+                          style: priceNumberTextStyle,
+                        )
+                      : Text(
+                          currencySign + ' 0',
+                          style: priceNumberTextStyle,
+                        ),
                   flex: 2,
                 ),
                 Expanded(

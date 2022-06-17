@@ -31,7 +31,7 @@ dependencies:
   flutter_dotenv: ^5.0.2
   cached_network_image: ^3.1.0+1
   date_picker_timeline: ^1.2.3
-  flutter_stripe: ^2.1.0
+  flutter_stripe: ^3.1.0
   flutter_svg: ^1.0.2
   lottie: ^1.2.1
   http: ^0.13.4
@@ -51,7 +51,7 @@ dependencies:
   timezone: ^0.8.0
   flutter_native_timezone: ^2.0.0
   jiffy: ^5.0.0
-  agora_rtc_engine: ^5.1.0
+  agora_rtc_engine: ^5.2.0
   permission_handler: ^9.2.0
   flutter_callkit_incoming: ^1.0.1+8
   json_serializable: ^6.2.0
